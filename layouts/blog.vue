@@ -6,14 +6,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Nav from '../components/Nav.vue';
+import { Vue, Component } from 'vue-property-decorator';
 
-export default Vue.extend({
-    components: {
-        Nav
-    }
-})
+@Component
+export default class BlogLayout extends Vue {
+}
+
 </script>
 
 <style lang="scss">

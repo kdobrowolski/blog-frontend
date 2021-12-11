@@ -17,35 +17,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper';
+import { Component, Vue } from 'vue-property-decorator';
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css';
-import LatestPost from './LatestPost.vue';
+Vue.use(VueAwesomeSwiper)
 
-export default Vue.extend({
-    data() {
-      return {
-        swiperOptions: {
-          pagination: {
+@Component
+export default class LatestPostsBoard extends Vue {
+    swiperOptions: Object = {
+        pagination: {
             el: '.swiper-pagination',
             clickable: true,
-          },
-          speed: 1000,
-          loop: true,
-          autoplay: {
+        },
+        speed: 1000,
+        loop: true,
+        autoplay: {
             delay: 2500,
             disableOnInteraction: false
-          },
-        }
-      }
-    },
-    components: {
-        LatestPost,
-        Swiper,
-        SwiperSlide
-    },
-    directives: {
-        swiper: directive
-    },
-})
+        },
+    }
+}
 </script>

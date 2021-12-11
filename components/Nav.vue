@@ -17,18 +17,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator';
 
-export default Vue.extend({
-    data() {
-        return {
-            isActive: false
-        }
-    },
-    methods: {
-        handleNavList() {
-            this.isActive = !this.isActive;
-        }
+@Component
+export default class Nav extends Vue {
+    isActive: boolean = false;
+    
+    handleNavList() {
+        this.isActive = !this.isActive;
     }
-})
+}
 </script>
