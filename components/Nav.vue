@@ -2,18 +2,36 @@
     <nav class="nav">
         <div class="nav-container">
             <h1 class="nav-logo">BlogApp</h1>
-            <div class="nav-list">
+            <div class="nav-list" :class="{ 'openMenu': isActive }">
                 <ul class="nav-elements">
                     <li>Strona główna</li>
                     <li>O mnie</li>
                     <li>Posty</li>
                     <li>Kontakt</li>
                 </ul>
+                <font-awesome-icon class="closeIcon" icon="times" v-on:click="handleNavList"/>
             </div>
-            <font-awesome-icon class="menu-icon" icon="bars" />
+            <font-awesome-icon class="menu-icon" icon="bars" v-on:click="handleNavList"/>
         </div>
     </nav>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+    data() {
+        return {
+            isActive: false
+        }
+    },
+    methods: {
+        handleNavList() {
+            this.isActive = !this.isActive;
+        }
+    }
+})
+</script>
 
 <style lang="scss">
     .nav {
@@ -51,6 +69,10 @@
                     font-size: 3rem;
                     & > li {
                         margin-top: 40px;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
 
                     @include sm {
@@ -66,6 +88,21 @@
                         }
                     }
                 }
+                & > .closeIcon {
+                    position: absolute;
+                    right: 40px;
+                    top: 20px;
+                    display: block;
+                    font-size: 4rem;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    @include sm {
+                        display: none;
+                    }
+                }
 
                 @include sm {
                     position: relative;
@@ -76,10 +113,18 @@
                     background-color: transparent;
                 }
             }
+
+            & > .openMenu {
+                display: block;
+            }
             & > .menu-icon {
                     margin-top: 15px;
                     margin-left: auto;
                     font-size: 3.5rem;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
 
                     @include sm {
                         display: none;
