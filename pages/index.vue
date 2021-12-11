@@ -5,15 +5,19 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import LatestPosts from '../components/LatestPostsBoard.vue';
+import { Component, Vue } from "nuxt-property-decorator";
 
-export default Vue.extend({
+@Component({
   layout: 'blog',
   components: {
     LatestPosts
   }
 })
+
+export default class extends Vue {
+  
+}
 </script>
 
 <style lang="scss">
