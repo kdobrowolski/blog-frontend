@@ -1,0 +1,100 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 70px;
+    z-index: 999;
+    border-bottom: 1px solid $primary-border-color;
+    background-color: white;
+
+    & > .nav-container {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+        & > .nav-logo {
+            position: relative;
+            top: 20px;
+            margin: 0;
+            font-size: 2.2rem;
+            color: $primary-color;
+        }
+        & > .nav-list {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            & > .nav-elements {
+                margin-top: 125px;
+                padding: 0;
+                list-style: none;
+                text-align: center;
+                font-size: 3rem;
+                & > li {
+                    margin-top: 40px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                @include sm {
+                    display: flex;
+                    margin-top: 25px;
+                    font-size: 1.6rem;
+                    & > li {
+                        margin-top: 0;
+                        margin-right: 20px;
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+            & > .closeIcon {
+                position: absolute;
+                right: 40px;
+                top: 20px;
+                display: block;
+                font-size: 4rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                @include sm {
+                    display: none;
+                }
+            }
+
+            @include sm {
+                position: relative;
+                display: block;
+                width: auto;
+                height: auto;
+                margin-left: auto;
+                background-color: transparent;
+            }
+        }
+
+        & > .openMenu {
+            display: block;
+        }
+        & > .menu-icon {
+            margin-top: 15px;
+            margin-left: auto;
+            font-size: 3.5rem;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            @include sm {
+                display: none;
+            }
+        }
+    }
+}

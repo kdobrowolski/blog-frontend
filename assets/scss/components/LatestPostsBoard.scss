@@ -1,0 +1,12 @@
+.latest-posts {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    text-align: center;
+    & > .latest-posts-header {
+        font-size: 3rem;
+    }
+    @include lg {
+        width: 80%;
+    }
+}

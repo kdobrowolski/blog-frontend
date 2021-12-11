@@ -1,0 +1,66 @@
+.latest-post-container {
+    position: relative;
+    margin-top: 50px;
+    padding-bottom: 50px;
+
+    @include lg {
+        display: flex;
+    }
+    & > .latest-post-image {
+        width: 100%;
+        border-radius: 10px;
+
+        @include lg {
+            width: 40%;
+        }
+    }
+    & > .latest-post-box {
+        @include lg {
+            position: relative;
+            width: 50%;
+            margin-left: 5%
+        }
+
+        & > .latest-post-content {
+            @include xl {
+                position: absolute;
+                height: 50%;
+                margin-top: 5%;
+            }
+
+            @include xxl {
+                margin-top: 10%;
+            }
+            & > .latest-post-tags-and-date {
+                text-align: left;
+                font-size: 1.4rem;
+                & > .tags {
+                    font-weight: 700;
+                }
+                & > .date {
+                    color: #999;
+                }
+
+                @include md {
+                    font-size: 1.7rem;
+                }
+            }
+            & > .latest-post-header {
+                font-size: 2.5rem;
+                text-align: left;
+
+                @include md {
+                    font-size: 2.8rem;
+                }
+            }
+            & > .latest-post-description {
+                font-size: 1.3rem;
+                text-align: left;
+
+                @include md {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+}
