@@ -1,9 +1,9 @@
-.latest-posts {
+.Latest_posts_board {
     width: 90%;
     margin: 0 auto;
     padding-bottom: 40px;
     text-align: center;
-    & > .latest-posts-header {
+    & > .board_header {
         font-size: 3rem;
     }
     @include lg {

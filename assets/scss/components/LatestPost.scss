@@ -1,4 +1,4 @@
-.latest-post-container {
+.Latest_post {
     position: relative;
     margin-top: 50px;
     padding-bottom: 50px;
@@ -6,7 +6,7 @@
     @include lg {
         display: flex;
     }
-    & > .latest-post-image {
+    & > .Post_image {
         width: 100%;
         border-radius: 10px;
 
@@ -14,14 +14,14 @@
             width: 40%;
         }
     }
-    & > .latest-post-box {
+    & > .Post_box {
         @include lg {
             position: relative;
             width: 50%;
             margin-left: 5%
         }
 
-        & > .latest-post-content {
+        & > .box_content {
             @include xl {
                 position: absolute;
                 height: 50%;
@@ -31,21 +31,21 @@
             @include xxl {
                 margin-top: 10%;
             }
-            & > .latest-post-tags-and-date {
+            & > .content_info {
                 text-align: left;
                 font-size: 1.4rem;
-                & > .tags {
+                & > .info_tags {
                     font-weight: 700;
                 }
-                & > .date {
-                    color: #999;
+                & > .info_date {
+                    color: $secondary-color;
                 }
 
                 @include md {
                     font-size: 1.7rem;
                 }
             }
-            & > .latest-post-header {
+            & > .content_header {
                 font-size: 2.5rem;
                 text-align: left;
 
@@ -53,7 +53,7 @@
                     font-size: 2.8rem;
                 }
             }
-            & > .latest-post-description {
+            & > .content_description {
                 font-size: 1.3rem;
                 text-align: left;
 

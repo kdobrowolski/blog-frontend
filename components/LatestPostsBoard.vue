@@ -1,6 +1,6 @@
 <template>
-    <section class="latest-posts">
-        <h1 class="latest-posts-header">Najnowsze</h1>
+    <section class="Latest_posts_board">
+        <h1 class="board_header">Najnowsze</h1>
         <swiper ref="mySwiper" v-bind:options="swiperOptions">
             <swiper-slide>
                 <LatestPost />
@@ -20,6 +20,7 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css';
+import '../assets/scss/components/LatestPostsBoard.scss';
 Vue.use(VueAwesomeSwiper)
 
 @Component
