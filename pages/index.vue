@@ -13,6 +13,7 @@ import { Component, Vue } from "nuxt-property-decorator";
 import LatestPosts from '../components/LatestPostsBoard.vue';
 import PostCard from '../components/PostCard.vue';
 import PostsJSON from '../assets/data.json';
+import '../assets/scss/pages/HomePage.scss';
 
 @Component({
   layout: 'blog',
@@ -27,29 +28,3 @@ export default class HomePage extends Vue {
 
 }
 </script>
-
-<style lang="scss">
-  .Main {
-    margin-top: 125px;
-
-    & > .Main_posts {
-      & > .posts_header {
-        display: block;
-        width: 100%;
-        padding-bottom: 40px;
-        text-align: center;
-        font-size: 3rem;
-      }
-      @include md {
-        display: flex;
-        width: 90%;
-        margin: 0 auto;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      @include lg {
-        width: 80%;
-      }
-    }
-  }
-</style>

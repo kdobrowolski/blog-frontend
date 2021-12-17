@@ -17,15 +17,16 @@
         cursor: pointer;
     }
 
-    & > .box_image {
+    & > .card_image {
         width: 100%;
         border-radius: 10px;
     }
-    & > .box_content {
+    & > .card_content {
         margin-top: 20px;
         & > .content_info {
             font-size: 1.4rem;
             & > .info_tags {
+                color: $primary-color;
                 font-weight: 700;
             }
             & > .info_date {

@@ -1,7 +1,7 @@
 <template>
     <div class="Post_card">
-        <img class="box_image" v-bind:src="'_nuxt/assets/img/' + image"/>
-        <div class="box_content">
+        <img class="card_image" v-bind:src="'_nuxt/assets/img/' + image"/>
+        <div class="card_content">
             <div class="content_info">
                 <span class="info_tags">{{ tags }}</span>
                 <span class="info_date"> - {{ date }}</span>

@@ -35,13 +35,14 @@
                 font-size: 3rem;
                 & > .list_item {
                     margin-top: 40px;
+                    letter-spacing: 1px;
 
                     &:hover {
                         cursor: pointer;
                     }
                 }
 
-                @include sm {
+                @include md {
                     display: flex;
                     margin-top: 25px;
                     font-size: 1.6rem;
@@ -65,12 +66,12 @@
                     cursor: pointer;
                 }
 
-                @include sm {
+                @include md {
                     display: none;
                 }
             }
 
-            @include sm {
+            @include md {
                 position: relative;
                 display: block;
                 width: auto;
@@ -92,7 +93,7 @@
                 cursor: pointer;
             }
 
-            @include sm {
+            @include md {
                 display: none;
             }
         }

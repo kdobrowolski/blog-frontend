@@ -1,6 +1,7 @@
 .Latest_post {
     position: relative;
     margin-top: 50px;
+    margin-left: 1px;
     padding-bottom: 50px;
 
     @include lg {
@@ -35,6 +36,7 @@
                 text-align: left;
                 font-size: 1.4rem;
                 & > .info_tags {
+                    color: $primary-color;
                     font-weight: 700;
                 }
                 & > .info_date {
