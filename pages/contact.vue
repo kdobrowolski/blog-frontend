@@ -4,10 +4,11 @@
       Skontaktuj się ze mną
     </h2>
     <form class="contact_form">
-      <Input type="text" name="fullname" placeholder="Imię i nazwisko" label="Imię i nazwisko"/>
-      <Input type="email" name="email" placeholder="Adres e-mail" label="Adres e-mail"/>
-      <Input type="tel" name="tel" placeholder="Nr telefonu" label="Nr telefonu"/>
+      <Input type="text" name="fullname" placeholder="Imię i nazwisko" label="Imię i nazwisko" />
+      <Input type="email" name="email" placeholder="Adres e-mail" label="Adres e-mail" />
+      <Input type="tel" name="tel" placeholder="Nr telefonu" label="Nr telefonu" />
       <Input name="msg" placeholder="Wiadomość" label="Wiadomość" is-textarea />
+      <Button value="Wyślij"/>
     </form>
   </div>
 </template>
@@ -15,12 +16,14 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import Input from '../components/Input.vue';
+import Button from '../components/Button.vue';
 import '../assets/scss/pages/Contact.scss';
 
 @Component({
   layout: 'blog',
   components: {
-    Input
+    Input,
+    Button
   }
 })
 export default class Contact extends Vue {

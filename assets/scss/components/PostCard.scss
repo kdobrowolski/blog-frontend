@@ -1,57 +1,56 @@
 .Post_card {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 30px !important;
-    padding-bottom: 20px;
-    padding-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    -webkit-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
-    -moz-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
-    box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px !important;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  -webkit-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
+  box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
+  transition: .5s;
+
+  &:hover {
+    border: 1px solid $secondary-color;
     transition: .5s;
+    cursor: pointer;
+  }
 
-    &:hover {
-        border: 1px solid $secondary-color;
-        transition: .5s;
-        cursor: pointer;
+  & > .card_image {
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+  & > .card_content {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 20px;
+    & > .content_info {
+      font-size: 1.4rem;
+      & > .info_tags {
+        color: $primary-color;
+        font-weight: 700;
+      }
+      & > .info_date {
+        color: $secondary-color;
+      }
     }
+    & > .content_header {
+      font-size: 2.5rem;
+    }
+    & > .content_description {
+      font-size: 1.3rem;
+    }
+  }
 
-    & > .card_image {
-        width: 95%;
-        display: block;
-        margin: 0 auto;
-        border-radius: 10px;
-    }
-    & > .card_content {
-        width: 95%;
-        margin: 0 auto;
-        margin-top: 20px;
-        & > .content_info {
-            font-size: 1.4rem;
-            & > .info_tags {
-                color: $primary-color;
-                font-weight: 700;
-            }
-            & > .info_date {
-                color: $secondary-color;
-            }
-        }
-        & > .content_header {
-            font-size: 2.5rem;
-        }
-        & > .content_description {
-            font-size: 1.3rem;
-        }
-    }
+  @include md {
+    width: 45%;
+    margin: 0;
+  }
 
-    @include md {
-        width: 45%;
-        margin: 0;
-    }
-
-    @include lg {
-        width: 30%;
-
-    }
+  @include lg {
+    width: 30%;
+  }
 }

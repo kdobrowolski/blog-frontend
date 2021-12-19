@@ -12,15 +12,21 @@
       <p class="content_description">
         {{ description }}
       </p>
+      <Button value="Czytaj dalej" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import Button from '../components/Button.vue';
 import '../assets/scss/components/PostCard.scss';
 
-@Component
+@Component({
+  components: {
+    Button
+  }
+})
 export default class PostCard extends Vue {
     @Prop(String) readonly title!: string | undefined;
     @Prop(String) readonly description!: string | undefined;

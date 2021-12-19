@@ -13,6 +13,7 @@
         <p class="content_description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac ante turpis. Etiam interdum luctus leo, sed semper libero egestas vitae. In hac habitasse platea dictumst. Sed ac feugiat lorem. Cras purus lorem, lacinia sed tortor vulputate, ultricies porttitor nibh.
         </p>
+        <Button class="content_btn--left" value="Czytaj dalej" />
       </div>
     </div>
   </div>
@@ -20,9 +21,14 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import Button from '../components/Button.vue';
 import '../assets/scss/components/LatestPost.scss';
 
-@Component
+@Component({
+  components: {
+    Button
+  }
+})
 export default class PostCard extends Vue {
   // @Prop(String) readonly title!: string | undefined;
   // @Prop(String) readonly description!: string | undefined;
