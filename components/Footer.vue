@@ -3,16 +3,16 @@
     <div class="footer_menu">
       <ul class="menu_list">
         <li class="list_item">
-          Strona główna
+          <NuxtLink class="item_link" to="/">Strona główna</NuxtLink>
         </li>
         <li class="list_item">
-          O mnie
+          <NuxtLink class="item_link" to="/about">O mnie</NuxtLink>
         </li>
         <li class="list_item">
-          Posty
+          <NuxtLink class="item_link" to="/posts">Posty</NuxtLink>
         </li>
         <li class="list_item">
-          Kontakt
+          <NuxtLink class="item_link" to="/contact">Kontakt</NuxtLink>
         </li>
       </ul>
       <div class="menu_contact_info">

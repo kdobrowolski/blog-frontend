@@ -19,9 +19,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import PostCard from '../components/PostCard.vue';
-import PostsJSON from '../assets/data.json';
-import '../assets/scss/pages/Posts.scss';
+import PostCard from '../../components/PostCard.vue';
+import PostsJSON from '../../assets/data.json';
+import '../../assets/scss/pages/posts/index.scss';
 
 @Component({
   layout: 'blog',
@@ -30,7 +30,7 @@ import '../assets/scss/pages/Posts.scss';
   }
 })
 
-export default class HomePage extends Vue {
+export default class PostsPage extends Vue {
   posts: Object = PostsJSON.posts
 }
 </script>

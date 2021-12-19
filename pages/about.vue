@@ -24,7 +24,7 @@ import '../assets/scss/pages/About.scss';
   }
 })
 
-export default class HomePage extends Vue {
+export default class AboutPage extends Vue {
 
 }
 </script>

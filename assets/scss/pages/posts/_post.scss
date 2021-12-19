@@ -1,0 +1,40 @@
+.Post_page {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 125px;
+
+  & > .page_main_image {
+    width: 100%;
+    border-radius: 10px;
+
+    @include md {
+      display: block;
+      margin: 0 auto;
+    }
+
+  }
+  & > .page_info {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    & > .info_tags {
+      color: $primary-color;
+      font-weight: 700;
+    }
+    & > .info_date {
+      color: $secondary-color;
+    }
+  }
+  & > .page_header {
+    font-size: 2.5rem;
+  }
+  & > .page_content {
+    font-size: 1.5rem;
+  }
+
+  @include md {
+    width: 80%;
+  }
+  @include lg {
+    width: 50%;
+  }
+}

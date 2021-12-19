@@ -26,7 +26,7 @@ import '../assets/scss/pages/Contact.scss';
     Button
   }
 })
-export default class Contact extends Vue {
+export default class ContactPage extends Vue {
 
 }
 </script>
