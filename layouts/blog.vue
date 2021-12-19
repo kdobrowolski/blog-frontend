@@ -1,9 +1,9 @@
 <template>
-    <div class="Blog_layout">
-        <Nav />
-        <Nuxt />
-        <Footer />
-    </div>
+  <div class="Blog_layout">
+    <Nav />
+    <Nuxt />
+    <Footer />
+  </div>
 </template>
 
 <script lang="ts">

@@ -2,8 +2,8 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 30px !important;
-    padding: 10px;
     padding-bottom: 20px;
+    padding-top: 10px;
     border: 1px solid transparent;
     border-radius: 10px;
     -webkit-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
@@ -18,10 +18,14 @@
     }
 
     & > .card_image {
-        width: 100%;
+        width: 95%;
+        display: block;
+        margin: 0 auto;
         border-radius: 10px;
     }
     & > .card_content {
+        width: 95%;
+        margin: 0 auto;
         margin-top: 20px;
         & > .content_info {
             font-size: 1.4rem;
@@ -48,6 +52,6 @@
 
     @include lg {
         width: 30%;
-        
+
     }
 }

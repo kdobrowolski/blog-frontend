@@ -1,8 +1,10 @@
 .Latest_post {
     position: relative;
     margin-top: 50px;
-    margin-left: 1px;
+  margin-right: 20px;
+  margin-left: 20px;
     padding-bottom: 50px;
+
 
     @include lg {
         display: flex;

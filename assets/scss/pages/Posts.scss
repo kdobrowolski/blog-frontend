@@ -1,8 +1,5 @@
-.Main {
-    position: relative;
-    margin-top: 125px;
-
-    & > .Main_posts {
+.Main_posts_page {
+    & > .page_posts {
       & > .posts_header {
         display: block;
         width: 100%;
