@@ -7,6 +7,7 @@
       <PostCard
         v-for="post in posts"
         :key="post.id"
+        :post-id="post.id"
         :title="post.title"
         :description="post.description"
         :tags="post.tags"
@@ -31,6 +32,6 @@ import '../../assets/scss/pages/posts/index.scss';
 })
 
 export default class PostsPage extends Vue {
-  posts: Object = PostsJSON.posts
+  posts: Object = PostsJSON.posts;
 }
 </script>

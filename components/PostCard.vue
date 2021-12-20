@@ -12,7 +12,7 @@
       <p class="content_description">
         {{ description }}
       </p>
-      <Button value="Czytaj dalej" />
+      <Button value="Czytaj dalej" :href="'/posts/' + postId" />
     </div>
   </div>
 </template>
@@ -28,10 +28,11 @@ import '../assets/scss/components/PostCard.scss';
   }
 })
 export default class PostCard extends Vue {
-    @Prop(String) readonly title!: string | undefined;
-    @Prop(String) readonly description!: string | undefined;
-    @Prop(String) readonly tags!: string | undefined;
-    @Prop(String) readonly date!: string | undefined;
-    @Prop(String) readonly image!: string | undefined;
+  @Prop(String) readonly title!: string | undefined;
+  @Prop(String) readonly description!: string | undefined;
+  @Prop(String) readonly tags!: string | undefined;
+  @Prop(String) readonly date!: string | undefined;
+  @Prop(String) readonly image!: string | undefined;
+  @Prop(Number) readonly postId!: number | undefined;
 }
 </script>

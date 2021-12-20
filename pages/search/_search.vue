@@ -6,6 +6,7 @@
     <PostCard
       v-for="post in searchedPosts"
       :key="post.id"
+      :post-id="post.id"
       :title="post.title"
       :description="post.description"
       :tags="post.tags"
@@ -36,11 +37,12 @@ export default class SearchPage extends Vue {
     const searchedPosts: any[] = [];
     // eslint-disable-next-line array-callback-return
     posts.map((item: any) => {
-      const found = RegExp('\\b' + params.search + '\\b').test(item.content);
+      const word = params.search;
+      const found = item.content.includes(word);
       if (found) {
         searchedPosts.push(item);
       }
-    })
+    });
     return { searchedPosts };
   }
 }

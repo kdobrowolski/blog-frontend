@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!isSearch" class="btn">
+  <button v-if="!isSearch" class="btn" @click="routeTo">
     {{ value }}
   </button>
   <button v-else class="btn" @click="search">
@@ -16,9 +16,14 @@ export default class Button extends Vue {
   @Prop(String) readonly value!: string
   @Prop(String) readonly input!: string
   @Prop(Boolean) readonly isSearch!: boolean
+  @Prop(String) readonly href!: string
 
   search () {
     this.$router.push({ path: '/search/' + this.input })
+  }
+
+  routeTo () {
+    this.$router.push({ path: this.href });
   }
 }
 </script>
