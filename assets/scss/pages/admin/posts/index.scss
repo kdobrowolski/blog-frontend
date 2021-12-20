@@ -1,0 +1,31 @@
+.Admin_posts_page {
+  width: 90%;
+  margin: 0 auto;
+  & > .page_header {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: $primary-color;
+    text-align: center;
+  }
+  & > .page_posts_header {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  & > .page_posts {
+    padding-bottom: 50px;
+    @include md {
+      display: flex;
+      width: 90%;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    @include lg {
+      width: 80%;
+    }
+  }
+
+}
