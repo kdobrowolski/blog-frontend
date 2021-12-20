@@ -1,0 +1,38 @@
+.Reactions_container {
+  & > .container_header {
+    font-size: 2rem;
+    color: $primary-color;
+  }
+  & > .container_icon {
+    display: inline-flex;
+    font-size: 3.5rem;
+
+    & > .icon_like {
+      color: $primary-color;
+      &:hover {
+        color: #66B2FF;
+      }
+    }
+    & > .icon_heart {
+      color: #e31b23;
+      &:hover {
+        color: #FF6666;
+      }
+    }
+    & > .icon_star {
+      color: #ffd27d;
+      &:hover {
+        color: #FFB266;
+      }
+    }
+    & > .icon_like:hover, .icon_heart:hover, .icon_star:hover {
+      cursor: pointer;
+    }
+    & > .icon_count_reactions {
+      margin-left: 5px;
+    }
+  }
+  & > .container_icon--margin-left {
+    margin-left: 20px;
+  }
+}

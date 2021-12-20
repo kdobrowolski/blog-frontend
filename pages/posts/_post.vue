@@ -15,6 +15,7 @@
 
       Quisque eros nibh, suscipit ac dui vel, lacinia ullamcorper purus. Duis vehicula orci risus, non feugiat purus faucibus eget. Maecenas at pretium ex. Nunc lacinia vehicula nunc, ullamcorper semper elit tristique at. Donec non pulvinar risus, in aliquet risus. Curabitur non metus viverra, fermentum tortor ac, sagittis risus. Maecenas vitae ante non orci congue posuere vel sit amet risus. Donec et mauris tristique, venenatis sem eget, blandit ligula. Nullam id erat mi. Donec auctor risus leo, ac convallis dui feugiat ut. Morbi scelerisque ex quis augue bibendum pharetra. Integer eu dictum tortor. Fusce vitae magna vel libero ultricies malesuada non nec erat. Donec ipsum est, aliquet at viverra vitae, iaculis ac risus. Sed auctor ullamcorper condimentum.
     </div>
+    <Reactions />
     <CommentsContainer />
   </div>
 </template>
@@ -22,12 +23,14 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import CommentsContainer from '~/components/CommentsContainer.vue';
+import Reactions from '~/components/Reactions.vue';
 import '../../assets/scss/pages/posts/_post.scss';
 
 @Component({
   layout: 'blog',
   components: {
-    CommentsContainer
+    CommentsContainer,
+    Reactions
   }
 })
 export default class PostPage extends Vue {
