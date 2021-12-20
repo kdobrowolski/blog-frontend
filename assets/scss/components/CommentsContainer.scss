@@ -1,0 +1,18 @@
+.Comments_container {
+  & > .container_header {
+    font-size: 2rem;
+    color: $primary-color;
+    text-align: center;
+  }
+  & > .container_form {
+    text-align: center;
+
+    & > .form_input {
+      & > .container_input, .container_textarea {
+        @include lg {
+          width: 50%;
+        }
+      }
+    }
+  }
+}

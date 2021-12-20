@@ -1,0 +1,61 @@
+.Input_container {
+  margin-top: 20px;
+  & > .container_label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: $primary-color;
+    font-weight: 500;
+  }
+  & > .container_input {
+    width: 70%;
+    padding: 5px;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $primary-color;
+    }
+
+    @include md {
+      width: 50%;
+    }
+
+    @include lg {
+      width: 30%;
+    }
+
+    @include xxl {
+      width: 20%;
+    }
+  }
+
+  & > .container_textarea {
+    width: 70%;
+    height: 120px;
+    padding: 5px;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $primary-color;
+    }
+
+    @include md {
+      width: 50%;
+    }
+
+    @include lg {
+      width: 30%;
+    }
+
+    @include xxl {
+      width: 20%;
+    }
+  }
+}

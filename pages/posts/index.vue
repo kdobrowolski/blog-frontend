@@ -1,7 +1,6 @@
 <template>
-  <div class="Main_homepage">
-    <LatestPosts />
-    <div class="homepage_posts">
+  <div class="Main_posts_page">
+    <div class="page_posts">
       <h1 class="posts_header">
         Artykuły
       </h1>
@@ -21,20 +20,18 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import LatestPosts from '../components/LatestPostsBoard.vue';
-import PostCard from '../components/PostCard.vue';
-import PostsJSON from '../assets/data.json';
-import '../assets/scss/pages/HomePage.scss';
+import PostCard from '../../components/PostCard.vue';
+import PostsJSON from '../../assets/data.json';
+import '../../assets/scss/pages/posts/index.scss';
 
 @Component({
   layout: 'blog',
   components: {
-    LatestPosts,
     PostCard
   }
 })
 
-export default class HomePage extends Vue {
+export default class PostsPage extends Vue {
   posts: Object = PostsJSON.posts;
 }
 </script>

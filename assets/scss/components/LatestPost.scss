@@ -1,68 +1,75 @@
 .Latest_post {
-    position: relative;
-    margin-top: 50px;
-    margin-left: 1px;
-    padding-bottom: 50px;
+  position: relative;
+  margin-top: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-bottom: 50px;
+
+  @include lg {
+    display: flex;
+  }
+  & > .Post_image {
+    width: 100%;
+    border-radius: 10px;
 
     @include lg {
-        display: flex;
+      width: 40%;
     }
-    & > .Post_image {
-        width: 100%;
-        border-radius: 10px;
-
-        @include lg {
-            width: 40%;
-        }
+  }
+  & > .Post_box {
+    @include lg {
+      position: relative;
+      width: 50%;
+      margin-left: 5%
     }
-    & > .Post_box {
-        @include lg {
-            position: relative;
-            width: 50%;
-            margin-left: 5%
+
+    & > .box_content {
+      @include xl {
+        position: absolute;
+        height: 50%;
+        margin-top: 5%;
+      }
+
+      @include xxl {
+        margin-top: 10%;
+      }
+      & > .content_info {
+        text-align: left;
+        font-size: 1.4rem;
+        & > .info_tags {
+          color: $primary-color;
+          font-weight: 700;
+        }
+        & > .info_date {
+          color: $secondary-color;
         }
 
-        & > .box_content {
-            @include xl {
-                position: absolute;
-                height: 50%;
-                margin-top: 5%;
-            }
-
-            @include xxl {
-                margin-top: 10%;
-            }
-            & > .content_info {
-                text-align: left;
-                font-size: 1.4rem;
-                & > .info_tags {
-                    color: $primary-color;
-                    font-weight: 700;
-                }
-                & > .info_date {
-                    color: $secondary-color;
-                }
-
-                @include md {
-                    font-size: 1.7rem;
-                }
-            }
-            & > .content_header {
-                font-size: 2.5rem;
-                text-align: left;
-
-                @include md {
-                    font-size: 2.8rem;
-                }
-            }
-            & > .content_description {
-                font-size: 1.3rem;
-                text-align: left;
-
-                @include md {
-                    font-size: 1.6rem;
-                }
-            }
+        @include md {
+          font-size: 1.7rem;
         }
+      }
+      & > .content_header {
+        font-size: 2.5rem;
+        text-align: left;
+
+        @include md {
+          font-size: 2.8rem;
+        }
+      }
+      & > .content_description {
+        font-size: 1.3rem;
+        text-align: left;
+
+        @include md {
+          font-size: 1.6rem;
+        }
+      }
+      & > .content_btn--left {
+        margin-left: 0;
+        margin-right: auto;
+        margin-top: 50px;
+        display: block;
+      }
     }
+  }
 }
