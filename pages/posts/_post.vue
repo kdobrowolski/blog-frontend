@@ -25,6 +25,6 @@ import '../../assets/scss/pages/posts/_post.scss';
 @Component({
   layout: 'blog'
 })
-export default class PostsPage extends Vue {
+export default class PostPage extends Vue {
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="Post_card">
-    <img class="card_image" :src="'_nuxt/assets/img/' + image" alt="card_image">
+    <img class="card_image" :src="require('@/assets/img/' + image)" alt="card_image">
     <div class="card_content">
       <div class="content_info">
         <span class="info_tags">{{ tags }}</span>
