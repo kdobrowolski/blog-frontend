@@ -12,7 +12,9 @@
       <p class="content_description">
         {{ description }}
       </p>
-      <Button value="Czytaj dalej" :href="'/posts/' + postId" />
+    </div>
+    <div class="card_btn">
+      <Button class="btn--center" value="Czytaj dalej" :href="'/posts/' + postId" />
     </div>
   </div>
 </template>
