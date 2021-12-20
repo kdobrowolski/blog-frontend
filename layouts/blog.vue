@@ -1,7 +1,7 @@
 <template>
   <div class="Blog_layout">
     <Nav />
-    <Input class="layout_search" type="text" placeholder="Wyszukaj" name="search" label="Wyszukaj post"/>
+    <Input class="layout_search" type="text" placeholder="Wyszukaj" name="search" label="Wyszukaj post" is-search />
     <Nuxt />
     <Footer />
   </div>
@@ -18,6 +18,7 @@ import '../assets/scss/layouts/blog.scss';
   }
 })
 export default class BlogLayout extends Vue {
+
 }
 
 </script>
