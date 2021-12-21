@@ -17,7 +17,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 import '../assets/scss/components/ModeratorCard.scss';
 
 @Component
-export default class HomePage extends Vue {
+export default class ModeratorCard extends Vue {
 
 }
 </script>

@@ -12,7 +12,10 @@
       <p class="content_description">
         {{ description }}
       </p>
-      <Button value="Czytaj dalej" :href="'/posts/' + postId" />
+    </div>
+    <div class="card_btn">
+      <Button v-if="!isAdmin" class="btn--center" value="Czytaj dalej" :href="'/posts/' + postId" />
+      <Button v-else class="btn--center" value="Zarządzaj" :href="'/admin/posts/' + postId" />
     </div>
   </div>
 </template>
@@ -34,5 +37,6 @@ export default class PostCard extends Vue {
   @Prop(String) readonly date!: string | undefined;
   @Prop(String) readonly image!: string | undefined;
   @Prop(Number) readonly postId!: number | undefined;
+  @Prop(Boolean) readonly isAdmin!: number | undefined;
 }
 </script>
