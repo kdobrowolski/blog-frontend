@@ -3,7 +3,7 @@
     <h1 class="page_header">
       Panel administatora
     </h1>
-    <Button value="Dodaj post" />
+    <Button value="Dodaj post" href="/admin/posts/add" />
     <Button value="Wróć" href="/admin" />
     <p class="page_posts_header">
       Lista postów
