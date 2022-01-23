@@ -1,23 +1,24 @@
 <template>
   <div class="Moderator_card">
-    <div class="card_avatar" />
     <div class="card_info">
       <p class="card_username">
-        Alan Oleszek
+        {{ firstName + " " + lastName }}
       </p>
-      <p class="card_job">
-        Full-Stack Developer in Kysune.me
+      <p class="card_email">
+        {{ email }}
       </p>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import '../assets/scss/components/ModeratorCard.scss';
+<script>
 
-@Component
-export default class ModeratorCard extends Vue {
-
-}
+export default {
+  name: 'ModeratorCard',
+  props: ['firstName', 'lastName', 'email']
+};
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/ModeratorCard.scss';
+</style>

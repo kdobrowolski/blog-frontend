@@ -8,37 +8,35 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Blog By Kacper Dobrowolski' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
     ]
+  },
+
+  server: {
+    port: 4000
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~assets/css/main.css'
+    '~assets/scss/main.scss',
+    'quill/dist/quill.core.css',
+    // for snow theme
+    'quill/dist/quill.snow.css',
+    // for bubble theme
+    'quill/dist/quill.bubble.css'
+    // ...
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/TiptapVuetify', mode: 'client' }
-  ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    '@nuxtjs/style-resources',
-    '@nuxtjs/fontawesome',
+    { src: '~plugins/nuxt-quill-plugin', ssr: false },
+    '~/plugins/VueAwesomeSwiper',
+    { src: '~/plugins/intervalToken', ssr: false },
+    '~/plugins/axios',
+    '~plugins/filters.js'
   ],
 
   fontawesome: {
@@ -48,26 +46,57 @@ export default {
     }
   },
 
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildModules: [
+    // https://go.nuxtjs.dev/typescript
+    '@nuxtjs/style-resources',
+    '@nuxtjs/fontawesome',
+  ],
+
   styleResources: {
     scss: [
       '~assets/scss/mixins.scss',
       '~assets/scss/variables.scss',
-      '~assets/scss/main.scss'
     ]
   },
-
+  ssr: true,
+  target: 'server',
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify'
+    ['cookie-universal-nuxt', { alias: 'cookiz' }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+    credentials: true,
+  },
+
+  proxy: {
+    '/api': {
+      target: `${process.env.API_URL}/api`,
+      changeOrigin: true,
+      pathRewrite: { '^/api': '/' }
+    },
+    '/public': {
+      target: `${process.env.API_URL}/public`,
+      changeOrigin: true,
+      pathRewrite: { '^/public': '/' }
+    }
+  },
+
+  bootstrapVue: {
+    components: ['BPagination'],
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['vuetify/lib', 'tiptap-vuetify']
+    extractCSS: true,
   }
 }

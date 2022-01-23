@@ -33,12 +33,13 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import '../assets/scss/components/Footer.scss';
+<script>
 
-@Component
-export default class PostCard extends Vue {
-
+export default {
+  name: 'Footer',
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/Footer.scss';
+</style>

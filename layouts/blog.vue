@@ -7,18 +7,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import Input from '../components/Input.vue';
-import '../assets/scss/layouts/blog.scss';
+<script>
 
-@Component({
-  components: {
-    Input
-  }
-})
-export default class BlogLayout extends Vue {
-
-}
+export default {
+  name: 'BlogLayout'
+};
 
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/layouts/Blog.scss';
+</style>

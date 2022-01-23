@@ -1,34 +1,125 @@
 <template>
   <div class="Comments_container">
-    <h2 class="container_header">
+    <h2 v-if="Object.keys(commentsData).length !== 0" class="container_header">
       Komentarze
     </h2>
-    <form class="container_form">
-      <Input class="form_input" type="text" placeholder="Imię i nazwisko" name="fullname" label="Imię i nazwisko" />
-      <Input class="form_input" placeholder="Treść" name="content" label="Treść" is-textarea />
-      <Button class="form_btn" value="Dodaj komentarz" />
-    </form>
-    <Comment />
-    <Comment />
-    <Comment />
+    <template v-if="!isAdmin">
+      <form class="container_form" @submit.prevent="submit">
+        <Input v-model="fullname" class="form_input" type="text" placeholder="Imię i nazwisko" name="fullname" label="Imię i nazwisko" />
+        <p v-if="errors.fullnameError" class="form_error">{{ errors.fullnameError }}</p>
+        <Input v-model="content" class="form_input" placeholder="Treść" name="content" label="Treść" is-textarea />
+        <p v-if="errors.contentError" class="form_error">{{ errors.contentError }}</p>
+        <p v-if="success" class="form_success">Dodano komentarz!</p>
+        <Button class="form_btn" value="Dodaj komentarz" is-submit />
+      </form>
+    </template>
+    <h2 v-if="Object.keys(commentsData).length === 0" class="container_header">
+      Brak komentarzy
+    </h2>
+    <Comment
+      id="comment"
+      v-for="comment in itemsForList" 
+      :key="comment.id"
+      :comment-id="comment.id"
+      :fullname="comment.fullname" 
+      :date="comment.date" 
+      :content="comment.content"
+      :is-admin="isAdmin"
+    />
+    <div v-if="Object.keys(commentsData).length !== 0" class="pagination_container" >
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="commentsData.length"
+        :per-page="perPage"
+        aria-controls="comment"
+        align="center"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import Comment from '~/components/Comment.vue';
-import Input from '~/components/Input.vue';
-import Button from '~/components/Button.vue';
-import '../assets/scss/components/CommentsContainer.scss';
+<script>
+import Button from './Button';
+import Input from './Input';
+import Comment from './Comment';
 
-@Component({
+export default {
+  name: 'CommentsContainer',
   components: {
-    Comment,
+    Button,
     Input,
-    Button
-  }
-})
-export default class CommentsContainer extends Vue {
+    Comment
+  },
+  props: {
+    comments: {},
+    isAdmin: {
+      type: Boolean
+    }
+  },
+  data: () => ({
+    commentsData: null,
+    fullname: '',
+    content: '',
+    errors: {
+      fullnameError: null,
+      contentError: null,
+    },
+    success: false,
+    perPage: 6,
+    currentPage: 1
+  }),
+  created() {
+    this.commentsData = this.comments;
+  },
+  computed: {
+    itemsForList: {
+      get: function () {
+        return this.commentsData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
+      }
+    }
+  },
+  methods: {
+    async submit() {
+      this.errors = {
+        fullnameError: null,
+        contentError: null
+      }
+      this.success = false;
 
+      if (this.fullname === '' || undefined) {
+        this.errors.fullnameError = "Imię i nazwisko jest wymagane!"
+      }
+      
+      if (this.content === '' || undefined) {
+        this.errors.contentError = "Treść jest wymagana!";
+      }
+
+      if (!this.errors.fullnameError && !this.errors.contentError) {
+        try {
+          const postId = this.$route.params.post;
+          const comment = {
+            fullname: this.fullname,
+            content: this.content,
+          }
+
+          const payload = {
+            postId,
+            comment
+          }
+
+          await this.$store.dispatch('comments/createComment', payload);
+          const newComments = await this.$store.getters['comments/getComments'];
+          this.commentsData = newComments;
+          this.success = true;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/CommentsContainer.scss';
+</style>

@@ -1,29 +1,44 @@
 <template>
   <div class="Admin_moderators_page">
-    <h1 class="page_header">
-      Panel administratora
-    </h1>
-    <Button value="Dodaj moderatora" href="/admin/moderators/add" />
+    <Button v-if="user.isAdmin ? true : false" value="Dodaj moderatora" href="/admin/moderators/add" />
     <Button value="Wróć" href="/admin" />
-    <ModeratorAdmin />
-    <ModeratorAdmin />
-    <ModeratorAdmin />
+    <h2 class="page_header_moderators">Lista moderatorów</h2>
+    <ModeratorAdmin 
+      v-for="moderator in moderators" 
+      :key="moderator.id" 
+      :firstName="moderator.firstName" 
+      :lastName="moderator.lastName"
+      :email="moderator.email"
+      :id="moderator.id"
+      :userIsAdmin="user.isAdmin"
+    />
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import Button from '~/components/Button.vue';
-import ModeratorAdmin from '~/components/ModeratorAdmin.vue';
-import '~/assets/scss/pages/admin/moderators/index.scss';
+<script>
+import ModeratorAdmin from '../../../components/ModeratorAdmin';
+import Button from '../../../components/Button';
 
-@Component({
+export default {
+  name: 'AdminModeratorsPage',
+  layout: 'admin',
   components: {
-    Button,
-    ModeratorAdmin
-  }
-})
-export default class AdminModeratorsPage extends Vue {
+    ModeratorAdmin,
+    Button
+  },
+  middleware: ['logged-in'],
+  async asyncData({ store }) {
+    await store.dispatch('users/getModerators');
 
-}
+    const moderators = store.getters['users/getModerators'];
+    const user = store.getters['users/getUser'];
+
+    return { moderators, user };
+  }
+};
+
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/admin/moderators/index.scss';
+</style>

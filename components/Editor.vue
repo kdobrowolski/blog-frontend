@@ -1,76 +1,58 @@
 <template>
-  <div class="Editor">
-    <ClientOnly>
-      <tiptap-vuetify v-model="content" :extensions="extensions" data-app />
-
-      <template #placeholder>
-        Loading...
-      </template>
-    </ClientOnly>
-  </div>
+  <section class="Editor">
+    <client-only>
+      <quill-editor
+        ref="editor"
+        v-model="content"
+        :options="editorOption"
+      />
+    </client-only>
+  </section>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import {
-  TiptapVuetify,
-  Heading,
-  Bold,
-  Italic,
-  Strike,
-  Underline,
-  Code,
-  Paragraph,
-  BulletList,
-  OrderedList,
-  ListItem,
-  Link,
-  Blockquote,
-  HardBreak,
-  HorizontalRule,
-  History,
-  Image
-} from 'tiptap-vuetify';
-import Button from '~/components/Button.vue';
-import '~/assets/scss/components/Editor.scss';
-
-@Component({
-  components: {
-    Button,
-    TiptapVuetify
-  }
-})
-export default class EditorComponent extends Vue {
-  extensions: Object = [
-    History,
-    Blockquote,
-    Link,
-    Underline,
-    Strike,
-    Italic,
-    ListItem,
-    BulletList,
-    OrderedList,
-    Image,
-    [
-      Heading,
-      {
-        options: {
-          levels: [1, 2, 3]
+<script>
+  export default {
+    name: 'quill-example-nuxt',
+    props: ['valueInput'],
+    data () {
+      return {
+        content: '',
+        editorOption: {
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block', 'image']
+            ]
+          }
         }
       }
-    ],
-    Bold,
-    Link,
-    Code,
-    HorizontalRule,
-    Paragraph,
-    HardBreak
-  ]
+    },
+    mounted() {
+      console.log('App inited, the Quill instance object is:', this.$refs.editor.quill)
+      setTimeout(() => {
+        this.content = 'I was changed!'
+      }, 3000)
+    },
+  mounted() {
+    if (this.valueInput) {
+      this.content = this.valueInput;
+    }
+  },
+  watch: {
+    content: function() {
+      this.getContent(this.content);
+    }
+  },
+  methods: {
+    getContent(val) {
+      this.$emit('content', val);
+    }
+  }
+};
 
-  content: any = `
-      <h1>Yay Headlines!</h1>
-      <p>All these <strong>cool tags</strong> are working now.</p>
-    `
-}
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/Editor.scss';
+</style>

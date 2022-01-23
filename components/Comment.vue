@@ -1,19 +1,50 @@
 <template>
   <div class="Comment_container">
-    <p class="container_username">Alan Oleszek</p>
-    <p class="container_date">10 lipiec, 2022</p>
-    <p class="container_content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna ligula, pellentesque quis neque ut, iaculis gravida nisl. In nec purus nulla. Aenean mi nunc, gravida vitae orci eget, aliquam aliquet mi.
-    </p>
+    <p class="container_username">{{ fullname }}</p>
+    <p class="container_date">{{ date | formatDate }}</p>
+    <p class="container_content">{{ content }}</p>
+    <template v-if="isAdmin">
+      <Button value="Usuń" @click.native="deleteComment"/>
+    </template>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import '../assets/scss/components/Comment.scss';
+<script>
+import './Button.vue';
 
-@Component
-export default class Comment extends Vue {
-
+export default {
+  name: 'Comment',
+  props: {
+    fullname: {
+      type: String
+    },
+    date: {
+      type: String
+    },
+    content: {
+      type: String
+    },
+    isAdmin: {
+      type: Boolean
+    },
+    commentId: {
+      type: Number | String
+    }
+  },
+  methods: {
+    async deleteComment() {
+      try {
+        const payload = this.commentId;
+        await this.$store.dispatch('comments/deleteComment', payload);
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/Comment.scss';
+</style>

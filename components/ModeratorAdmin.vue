@@ -1,23 +1,22 @@
 <template>
   <div class="Admin_moderator">
-    <ModeratorCard />
-    <Button value="Zarządzaj" href="/admin/moderators/1" />
+    <ModeratorCard :firstName="firstName" :lastName="lastName" :email="email"/>
+    <Button v-if="userIsAdmin ? true : false" value="Zarządzaj" :href="`/admin/moderators/${id}`" />
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import Button from '~/components/Button.vue';
-import ModeratorCard from '~/components/ModeratorCard.vue';
-import '~/assets/scss/components/ModeratorAdmin.scss';
+<script>
+import ModeratorCard from './ModeratorCard';
 
-@Component({
+export default {
+  name: 'ModeratorAdmin',
   components: {
-    Button,
     ModeratorCard
-  }
-})
-export default class ModeratorAdmin extends Vue {
-
-}
+  },
+  props: ['firstName', 'lastName', 'email', 'id', 'userIsAdmin']
+};
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/components/ModeratorAdmin.scss';
+</style>

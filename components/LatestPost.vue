@@ -1,39 +1,32 @@
 <template>
   <div class="Latest_post">
-    <img class="Post_image" src="~/assets/img/coffee.jpeg" alt="post_image">
+    <img class="Post_image" :src="`/public/${image}`" alt="post_image">
     <div class="Post_box">
       <div class="box_content">
         <p class="content_info">
-          <span class="info_tags">Praca, Przerwa</span>
-          <span class="info_date"> - Czerwiec 27, 2022</span>
+          <span class="info_tags">{{ tags }}</span>
+          <span class="info_date"> - {{ date | formatDate }}</span>
         </p>
         <h2 class="content_header">
-          Czy palenie CBD podczas przerwy w pracy jest legalne?
+          {{ title }}
         </h2>
         <p class="content_description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac ante turpis. Etiam interdum luctus leo, sed semper libero egestas vitae. In hac habitasse platea dictumst. Sed ac feugiat lorem. Cras purus lorem, lacinia sed tortor vulputate, ultricies porttitor nibh.
+          {{ description }}
         </p>
-        <Button class="content_btn--left" value="Czytaj dalej" href="/posts/1" />
+        <Button class="content_btn--left content_btn--bottom" value="Czytaj dalej" :href="`/posts/${postId}`" />
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import Button from '../components/Button.vue';
-import '../assets/scss/components/LatestPost.scss';
+<script>
 
-@Component({
-  components: {
-    Button
-  }
-})
-export default class PostCard extends Vue {
-  // @Prop(String) readonly title!: string | undefined;
-  // @Prop(String) readonly description!: string | undefined;
-  // @Prop(String) readonly tags!: string | undefined;
-  // @Prop(String) readonly date!: string | undefined;
-  // @Prop(String) readonly image!: string | undefined;
+export default {
+  name: 'LatestPost',
+  props: [ 'postId', 'title', 'description', 'tags', 'date', 'image' ]
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/LatestPost.scss';
+</style>

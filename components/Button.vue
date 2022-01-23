@@ -1,29 +1,62 @@
 <template>
-  <button v-if="!isSearch" class="btn" @click="routeTo">
-    {{ value }}
-  </button>
-  <button v-else class="btn" @click="search">
-    {{ value }}
-  </button>
+  <div class="button_container">
+    <template v-if="!isSearch && !isSubmit">
+      <NuxtLink :to="{ path: this.href }">
+        <button class="btn" :value="value">
+          {{ value }}
+        </button>
+      </NuxtLink>
+    </template>
+    <template v-else-if="isSubmit">
+      <button type="submit" class="btn" :value="value">
+        {{ value }}
+      </button>
+    </template>
+    <template v-else>
+      <NuxtLink :to="{ path: '/search/' + this.input }">
+        <button class="btn" :value="value">
+          {{ value }}
+        </button>
+      </NuxtLink>
+    </template>
+  </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator';
-import '../assets/scss/components/Button.scss';
+<script>
 
-@Component
-export default class Button extends Vue {
-  @Prop(String) readonly value!: string
-  @Prop(String) readonly input!: string
-  @Prop(Boolean) readonly isSearch!: boolean
-  @Prop(String) readonly href!: string
+export default {
+  name: 'Button',
+  props: {
+    value: {
+      type: String,
+      required: true
+    },
+    input: {
+      type: String,
+      default: ''
+    },
+    isSearch: {
+      type: Boolean
+    },
+    href: {
+      type: String
+    },
+    isSubmit: {
+      type: Boolean
+    }
+  },
 
-  search () {
-    this.$router.push({ path: '/search/' + this.input })
-  }
-
-  routeTo () {
-    this.$router.push({ path: this.href });
+  methods: {
+    search () {
+      this.$router.push({ path: '/search/' + this.input });
+    },
+    routeTo () {
+      this.$router.push({ path: this.href });
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/Button.scss';
+</style>

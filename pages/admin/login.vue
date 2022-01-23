@@ -1,29 +1,51 @@
 <template>
   <div class="Admin_login_page">
-    <h1 class="page_header">
-      Zaloguj się do panelu administratora
-    </h1>
-    <form class="page_form">
-      <Input type="text" placeholder="Nazwa użytkownika" name="username" label="Nazwa użytkownika" />
-      <Input type="password" placeholder="Hasło" name="password" label="Hasło" />
-      <Button value="Zaloguj się" />
+    <form class="page_form" @submit.prevent="login($event)">
+      <Input v-model="user.username" type="text" placeholder="Nazwa użytkownika" name="username" label="Nazwa użytkownika" />
+      <Input v-model="user.password" type="password" placeholder="Hasło" name="password" label="Hasło" />
+      <p class="form_error">{{ this.$store.state.users.error }}</p>
+      <p class="form_error">{{ this.error }}</p>
+      <Button value="Zaloguj się" is-submit />
     </form>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import Input from '~/components/Input.vue';
-import Button from '~/components/Button.vue';
-import '~/assets/scss/pages/admin/Login.scss';
+<script>
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-@Component({
+export default {
+  name: 'AdminLogin',
+  layout: 'admin',
+  middleware: ['logged-out'],
   components: {
     Input,
     Button
+  },
+  data: () => ({
+    user: {
+      username: '',
+      password: ''
+    },
+    error: ''
+  }),
+  methods: {
+    async login (e) {
+      try {
+        const payload = {
+          ...this.user,
+        };
+        await this.$store.dispatch('users/login', payload);
+        window.location = '/admin';
+      } catch (error) {
+        this.error = 'Nie udalo sie zalogowac!';
+        console.error(error);
+      }
+    }
   }
-})
-export default class AdminLogin extends Vue {
-
-}
+};
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/admin/Login.scss';
+</style>

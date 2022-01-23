@@ -1,29 +1,42 @@
 <template>
   <div class="Admin_home_page">
-    <h1 class="page_header">
-      Panel administratora
-    </h1>
     <p class="page_active_user">
       Jesteś zalogowany jako
-      <span class="user--color">Kacper Dobrowolski</span>
+      <span class="user--color">{{ getFullName }}</span>
     </p>
+    <Button class="page_btn--width" value="O mnie" href="/admin/aboutme" />
     <Button class="page_btn--width" value="Posty" href="/admin/posts" />
     <Button class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
-    <Button class="page_btn--width" value="Wyloguj się" />
+    <Button class="page_btn--width" value="Wyloguj się" @click.native="logout" />
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import Button from '~/components/Button.vue';
-import '~/assets/scss/pages/admin/index.scss';
+<script>
+import Button from '../../components/Button';
 
-@Component({
+export default {
+  name: 'AdminHomePage',
+  layout: 'admin',
   components: {
     Button
+  },
+  middleware: ['logged-in'],
+  computed: {
+    getFullName () {
+      const user = this.$store.getters['users/getUser'];
+      return user && `${user.firstName} ${user.lastName}` || null;
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('users/logout');
+      window.location = '/admin/login';
+    }
   }
-})
-export default class AdminHomePage extends Vue {
+};
 
-}
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/admin/index.scss';
+</style>

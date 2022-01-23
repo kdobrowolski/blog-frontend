@@ -16,35 +16,41 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import PostsJSON from '~/assets/data.json';
-import PostCard from '~/components/PostCard.vue';
-import '~/assets/scss/pages/search/_search.scss';
+<script>
+import PostCard from '../../components/PostCard';
 
-@Component({
+export default {
   layout: 'blog',
+  name: 'SearchPage',
   components: {
     PostCard
-  }
-})
-export default class SearchPage extends Vue {
-  searchedPosts: any[] = [];
+  },
+  data: () => ({
+    searchedPosts: []
+  }),
+  async asyncData ({ params, store }) {
+    try {
+      await store.dispatch('posts/getPosts');
+      const res = await store.getters['posts/getPosts'];
+      const posts = res.posts;
 
-  // eslint-disable-next-line require-await
-  async asyncData ({ params }: any) {
-    const posts = PostsJSON.posts;
-    const searchedPosts: any[] = [];
-    // eslint-disable-next-line array-callback-return
-    posts.map((item: any) => {
-      const word = params.search;
-      const found = item.content.includes(word);
-      if (found) {
-        searchedPosts.push(item);
-      }
-    });
-    return { searchedPosts };
-  }
-}
+      const searchedPosts = [];
+      posts.map((item) => {
+        const word = params.search;
+        const found = item.content.includes(word) || item.title.includes(word);
+        if (found) {
+          searchedPosts.push(item);
+        }
+      });
 
+      return { searchedPosts };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/search/_search.scss';
+</style>

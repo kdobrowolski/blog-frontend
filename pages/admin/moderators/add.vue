@@ -1,26 +1,25 @@
 <template>
   <div class="Admin_moderators_add_page">
-    <h1 class="page_header">
-      Panel administratora
-    </h1>
     <ModeratorForm />
-    <Button value="Wróć" href="/admin/moderators" />
+    <Button value="Wróć" :href="'/admin/moderators'" />
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import Button from '~/components/Button.vue';
-import ModeratorForm from '~/components/ModeratorForm.vue';
-import '~/assets/scss/pages/admin/moderators/add.scss';
+<script>
+import ModeratorForm from '../../../components/ModeratorForm';
+import Button from '../../../components/Button';
 
-@Component({
+export default {
+  name: 'AdminModeratorAdd',
+  layout: 'admin',
+  middleware: ['is-moderator', 'logged-in'],
   components: {
-    Button,
-    ModeratorForm
+    ModeratorForm,
+    Button
   }
-})
-export default class AdminModeratorAdd extends Vue {
-
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/admin/moderators/add.scss';
+</style>

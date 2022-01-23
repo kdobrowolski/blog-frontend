@@ -1,10 +1,10 @@
 <template>
   <div class="Post_card">
-    <img class="card_image" :src="require('@/assets/img/' + image)" alt="card_image">
+    <img class="card_image" :src="`/public/${image}`" alt="card_image">
     <div class="card_content">
       <div class="content_info">
         <span class="info_tags">{{ tags }}</span>
-        <span class="info_date"> - {{ date }}</span>
+        <span class="info_date"> - {{ date | formatDate }}</span>
       </div>
       <h2 class="content_header">
         {{ title }}
@@ -20,23 +20,41 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import Button from '../components/Button.vue';
-import '../assets/scss/components/PostCard.scss';
+<script>
+import Button from './Button';
 
-@Component({
+export default {
+  name: 'PostCard',
   components: {
     Button
+  },
+  props: {
+    title: {
+      type: String
+    },
+    description: {
+      type: String
+    },
+    tags: {
+      type: String
+    },
+    date: {
+      type: String
+    },
+    image: {
+      type: String
+    },
+    postId: {
+      type: [ String, Number ]
+    },
+    isAdmin: {
+      type: Boolean
+    }
   }
-})
-export default class PostCard extends Vue {
-  @Prop(String) readonly title!: string | undefined;
-  @Prop(String) readonly description!: string | undefined;
-  @Prop(String) readonly tags!: string | undefined;
-  @Prop(String) readonly date!: string | undefined;
-  @Prop(String) readonly image!: string | undefined;
-  @Prop(Number) readonly postId!: number | undefined;
-  @Prop(Boolean) readonly isAdmin!: number | undefined;
-}
+};
+
 </script>
+
+<style lang="scss">
+  @import '../assets/scss/components/PostCard.scss';
+</style>

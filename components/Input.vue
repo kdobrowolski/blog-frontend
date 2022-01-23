@@ -1,30 +1,85 @@
 <template>
   <div class="Input_container">
     <label class="container_label" :for="name">{{ label }}</label>
-    <input v-if="!isTextarea" v-model="value" :id="name" class="container_input" :type="type" :placeholder="placeholder">
-    <textarea v-if="isTextarea" :id="name" class="container_textarea" :placeholder="placeholder" />
-    <Button v-if="isSearch" value="Wyszukaj" :input="value" is-search />
+    <template v-if="!isTextarea && !isFile && !isSearch">
+      <input :value="value" :id="name" @input="updateValue($event.target.value)" class="container_input" :type="type" :placeholder="placeholder">
+    </template>
+    <template v-else-if="isFile">
+      <input v-model="value" :id="name" @input="updateValue($event.target.files[0])" class="container_input" :type="type" :placeholder="placeholder">
+    </template>
+    <template v-else-if="isTextarea">
+      <textarea :id="name" :value="value" @input="updateValue($event.target.value)" class="container_textarea" :placeholder="placeholder" />
+    </template>
+    <template v-if="isSearch">
+      <input v-model="inputValue" :id="name" class="container_input" :type="type" :placeholder="placeholder">
+      <Button value="Wyszukaj" :input="inputValue" is-search />
+    </template>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator';
-import Button from '../components/Button.vue';
-import '../assets/scss/components/Input.scss';
+<script>
+import Button from './Button';
 
-@Component({
+export default {
+  name: 'Input',
   components: {
     Button
-  }
-})
-export default class Input extends Vue {
-  @Prop(String) readonly name!: string;
-  @Prop(String) readonly type!: string;
-  @Prop(String) readonly placeholder!: string;
-  @Prop(String) readonly label!: string;
-  @Prop(Boolean) readonly isTextarea!: Boolean;
-  @Prop(Boolean) readonly isSearch!: Boolean;
+  },
+  props: {
+    name: {
+      type: String
+    },
+    type: {
+      type: String
+    },
+    placeholder: {
+      type: String
+    },
+    label: {
+      type: String
+    },
+    isTextarea: {
+      type: Boolean
+    },
+    isSearch: {
+      type: Boolean
+    },
+    isFile: {
+      type: Boolean
+    },
+    valueInput: {
+      type: [ String, Boolean ]
+    },
+  },
 
-  value: string = '';
-}
+  data: () => ({
+    inputValue: '',
+    file: null
+  }),
+
+  methods: {
+    updateValue (value) {
+      this.$emit('input', value);
+    },
+  },
+  computed: {
+    value: {
+      get: function () {
+        if (this.valueInput) {
+          return this.value = this.valueInput;
+        } else {
+          return this.value = '';
+        }
+      },
+      set: function (newValue) {
+        return newValue;
+      }
+    },
+  }
+};
+
 </script>
+
+<style lang="scss" scoped>
+  @import '../assets/scss/components/Input.scss';
+</style>

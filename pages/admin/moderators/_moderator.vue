@@ -1,27 +1,48 @@
 <template>
   <div class="Admin_moderators_add_page">
-    <h1 class="page_header">
-      Panel administratora
-    </h1>
-    <ModeratorForm moderator-exist />
-    <Button value="Usuń moderatora" />
+    <h2 class="page_header">Zmiana imienia i nazwiska</h2>
+    <EditModeratorForm :changeFullnameForm="true" type="fullname" />
+    <h2 class="page_header">Zmiana adresu e-mail</h2>
+    <EditModeratorForm :newEmailForm="true" type="email" />
+    <h2 class="page_header">Zmiana hasła</h2>
+    <EditModeratorForm :newPasswordForm="true" type="password" />
+    <Button value="Usuń moderatora" @click.native="deleteModerator" />
     <Button value="Wróć" href="/admin/moderators" />
+    <Alert v-if="alertIsActive" type="deleteModerator" @hide="alertIsActive = false"/>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
-import Button from '~/components/Button.vue';
-import ModeratorForm from '~/components/ModeratorForm.vue';
-import '~/assets/scss/pages/admin/moderators/add.scss';
+<script>
+import Button from '../../../components/Button';
+import EditModeratorForm from '../../../components/EditModeratorForm.vue';
+import Alert from '../../../components/Alert';
 
-@Component({
+export default {
+  name: 'AdminModeratorPage',
+  layout: 'admin',
   components: {
     Button,
-    ModeratorForm
+    EditModeratorForm,
+    Alert
+  },
+  data: () => ({
+    alertIsActive: false
+  }),
+  middleware: ['is-moderator', 'logged-in'],
+  methods: {
+    async deleteModerator() {
+      this.alertIsActive = true;
+    }
   }
-})
-export default class AdminModeratorPage extends Vue {
-
-}
+};
 </script>
+
+<style lang="scss" scoped>
+  @import '~/assets/scss/pages/admin/moderators/add.scss';
+
+  .page_header {
+    margin-top: 30px;
+    text-align: center;
+    color: $primary-color;
+  }
+</style>
