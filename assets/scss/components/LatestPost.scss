@@ -1,19 +1,25 @@
 .Latest_post {
   position: relative;
+  height: 500px;
   margin-top: 50px;
   margin-right: 20px;
   margin-left: 20px;
-  padding-bottom: 50px;
 
   @include lg {
     display: flex;
+    height: 350px;
   }
   & > .Post_image {
     width: 100%;
     border-radius: 10px;
+    height: 40%;
 
     @include lg {
       width: 40%;
+      height: 85% !important;
+    }
+    @include sm {
+      height: 60%;
     }
   }
   & > .Post_box {
@@ -25,7 +31,6 @@
 
     & > .box_content {
       @include xl {
-        position: absolute;
         height: 50%;
         margin-top: 5%;
       }
@@ -51,18 +56,30 @@
       & > .content_header {
         font-size: 2.5rem;
         text-align: left;
+        word-break: break-all;
 
         @include md {
           font-size: 2.8rem;
         }
       }
       & > .content_description {
+        display: -webkit-box;
         font-size: 1.3rem;
         text-align: left;
+        max-height: 100px;
+        max-width: 90%;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
 
         @include md {
           font-size: 1.6rem;
         }
+      }
+      & > .content_btn--bottom {
+        position: absolute !important;
+        width: 100%;
+        bottom: 50px;
       }
       & > .content_btn--left {
         margin-left: 0;

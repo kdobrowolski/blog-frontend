@@ -1,10 +1,10 @@
-.Admin_moderators_page {
+.Admin_layout {
   width: 90%;
   margin: 0 auto;
-
-  & > .page_header_moderators {
+  & > .layout_header {
     margin-top: 50px;
-    font-size: 2rem;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
     color: $primary-color;
     text-align: center;
   }

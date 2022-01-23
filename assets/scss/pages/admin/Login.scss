@@ -10,5 +10,11 @@
   & > .page_form {
     margin-top: 50px;
     text-align: center;
+
+    & > .form_error {
+      margin-top: 20px;
+      color: red;
+      font-size: 1.4rem;
+    }
   }
 }

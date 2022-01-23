@@ -1,26 +1,13 @@
 .User_card {
-  & > .user_avatar {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto;
-    background-color: red;
-    border-radius: 100%;
+  text-align: center;
 
-    @include lg {
-      width: 100px;
-      height: 100px;
-    }
+  & > .user_header {
+    margin-bottom: 30px;
+    font-size: 3rem;
   }
-  & > .user_username {
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-  }
-  & > .user_description {
+  & > .user_content {
     font-size: 1.3rem;
     color: $secondary-color;
-    text-align: center;
   }
 
   @include sm {

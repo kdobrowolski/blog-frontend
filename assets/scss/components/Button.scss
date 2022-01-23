@@ -1,21 +1,23 @@
-.btn {
-  display: block;
-  padding: 10px 40px 10px 40px;
+.button_container {
   margin: 0 auto;
   margin-top: 20px;
-  background-color: $primary-color;
-  color: white;
-  border: 1px solid $primary-color;
-  border-radius: 20px;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  transition: .3s;
-  font-weight: 600;
-
-  &:hover {
-    background-color: white;
-    color: $primary-color;
-    cursor: pointer;
+  text-align: center;
+  & > a > .btn, & > .btn {
+    padding: 10px 40px 10px 40px;
+    background-color: $primary-color;
+    color: white;
+    border: 1px solid $primary-color;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
     transition: .3s;
+    font-weight: 600;
+
+    &:hover {
+      background-color: white;
+      color: $primary-color;
+      cursor: pointer;
+      transition: .3s;
+    }
   }
 }

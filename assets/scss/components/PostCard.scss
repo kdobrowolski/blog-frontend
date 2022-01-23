@@ -1,6 +1,6 @@
 .Post_card {
   position: relative;
-  width: 90%;
+  width: 90% !important;
   min-height: 500px;
   overflow: hidden;
   margin: 0 auto;
@@ -13,6 +13,7 @@
   -moz-box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
   box-shadow: 8px 8px 20px -17px rgba(66, 68, 90, 1);
   transition: .5s;
+  word-break: break-all;
 
   &:hover {
     border: 1px solid $secondary-color;
@@ -22,7 +23,7 @@
 
   & > .card_image {
     width: 95%;
-    height: 40%;
+    height: 50%;
     display: block;
     margin: 0 auto;
     border-radius: 10px;
@@ -45,7 +46,13 @@
       font-size: 2.5rem;
     }
     & > .content_description {
+      display: -webkit-box;
       font-size: 1.3rem;
+      max-height: 100px;
+      max-width: 90%;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
   & > .card_btn {
@@ -60,15 +67,16 @@
   }
 
   @include md {
-    width: 45%;
-    margin: 0;
+    width: 45% !important;
+    margin: 0!important;
+    margin-top: 30px !important;
   }
 
   @include xl {
-    padding-bottom: 30px;
+    padding-bottom: 30px !important;;
   }
 
   @include xxl {
-    width: 30%;
+    width: 30% !important;;
   }
 }

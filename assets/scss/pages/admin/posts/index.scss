@@ -23,9 +23,5 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
-    @include lg {
-      width: 80%;
-    }
   }
-
 }
