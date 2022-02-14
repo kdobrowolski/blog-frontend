@@ -1,7 +1,10 @@
 <template>
   <div class="Search_page">
-    <h2 class="page_header">
+    <h2 v-if="searchedPosts.length !== 0" class="page_header">
       Wyszukane posty
+    </h2>
+    <h2 v-else class="page_header">
+      Brak wyszukanych postów
     </h2>
     <PostCard
       v-for="post in searchedPosts"

@@ -5,7 +5,7 @@
       <Input v-model="user.password" type="password" placeholder="Hasło" name="password" label="Hasło" />
       <p class="form_error">{{ this.$store.state.users.error }}</p>
       <p class="form_error">{{ this.error }}</p>
-      <Button value="Zaloguj się" is-submit />
+      <Button element="submit" value="Zaloguj się" />
     </form>
   </div>
 </template>

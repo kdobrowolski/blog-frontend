@@ -1,9 +1,9 @@
 <template>
   <div class="Admin_post_page">
     <Button value="Usuń post" @click.native="deletePost" />
-    <Button value="Zarządzaj komentarzami" :href="`/admin/posts/${post.id}/comments`" />
-    <Button value="Wróć" href="/admin/posts" />
-    <PostForm post-exist :formValue="post" form-type="edit" />
+    <Button element="nuxt-link" value="Zarządzaj komentarzami" :href="`/admin/posts/${post.id}/comments`" />
+    <Button element="nuxt-link" value="Wróć" href="/admin/posts" />
+    <PostForm post-exist :formValue="post" form-type="edit" :images="images"/>
     <Alert v-if="alertIsActive" type="deletePost" @hide="alertIsActive = false" />
   </div>
 </template>
@@ -33,11 +33,18 @@ export default {
   async asyncData({ route, store }) {
     if (route.params.post) {
       const id = route.params.post;
+      await store.dispatch('gallery/getImages');
+      const images = await store.getters['gallery/getImages'];
       const res = await store.dispatch('posts/getOnePost', id);
 
-      const post = res.post;
+      let createdAt = new Date(res.post.created_at);
 
-      return { post }
+      const post = {
+        ...res.post,
+        createdAt
+      };
+
+      return { post, images }
     }
   },
 }

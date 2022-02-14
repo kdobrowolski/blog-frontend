@@ -1,18 +1,18 @@
 <template>
   <div class="Input_container">
     <label class="container_label" :for="name">{{ label }}</label>
-    <template v-if="!isTextarea && !isFile && !isSearch">
+
+    <template v-if="!isTextarea && !isSearch">
       <input :value="value" :id="name" @input="updateValue($event.target.value)" class="container_input" :type="type" :placeholder="placeholder">
     </template>
-    <template v-else-if="isFile">
-      <input v-model="value" :id="name" @input="updateValue($event.target.files[0])" class="container_input" :type="type" :placeholder="placeholder">
-    </template>
+
     <template v-else-if="isTextarea">
       <textarea :id="name" :value="value" @input="updateValue($event.target.value)" class="container_textarea" :placeholder="placeholder" />
     </template>
+
     <template v-if="isSearch">
       <input v-model="inputValue" :id="name" class="container_input" :type="type" :placeholder="placeholder">
-      <Button value="Wyszukaj" :input="inputValue" is-search />
+      <Button element="search" value="Wyszukaj" :input="inputValue" />
     </template>
   </div>
 </template>
@@ -44,9 +44,6 @@ export default {
     isSearch: {
       type: Boolean
     },
-    isFile: {
-      type: Boolean
-    },
     valueInput: {
       type: [ String, Boolean ]
     },
@@ -54,7 +51,6 @@ export default {
 
   data: () => ({
     inputValue: '',
-    file: null
   }),
 
   methods: {

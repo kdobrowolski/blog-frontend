@@ -1,7 +1,7 @@
 <template>
   <div class="Admin_posts_page">
-    <Button value="Dodaj post" href="/admin/posts/add" />
-    <Button value="Wróć" href="/admin" />
+    <Button element="nuxt-link" value="Dodaj post" href="/admin/posts/add" />
+    <Button element="nuxt-link" value="Wróć" href="/admin" />
     <p class="page_posts_header">
       Lista postów
     </p>
@@ -14,7 +14,7 @@
           :title="post.title"
           :description="post.description"
           :tags="post.tags"
-          :date="post.date"
+          :date="post.created_at"
           :image="post.mainImage"
           is-admin
         />

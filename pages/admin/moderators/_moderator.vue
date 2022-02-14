@@ -7,7 +7,7 @@
     <h2 class="page_header">Zmiana hasła</h2>
     <EditModeratorForm :newPasswordForm="true" type="password" />
     <Button value="Usuń moderatora" @click.native="deleteModerator" />
-    <Button value="Wróć" href="/admin/moderators" />
+    <Button element="nuxt-link" value="Wróć" href="/admin/moderators" />
     <Alert v-if="alertIsActive" type="deleteModerator" @hide="alertIsActive = false"/>
   </div>
 </template>

@@ -1,5 +1,5 @@
 export const postValidation = (postValues ,isEdit) => {
-  const { title, description, tags, date, file, content } = postValues;
+  const { title, description, tags, date, mainImage, content } = postValues;
   let errors = {};
 
   // Title Input
@@ -23,14 +23,9 @@ export const postValidation = (postValues ,isEdit) => {
     errors.tagsError = "Pole tagi musi zawierać minimum 3 litery!";
   }
 
-  // Date Input
-  if (date === '' || undefined) {
-    errors.dateError = "Data jest wymagana!";
-  }
-
   // mainImage Input
   if(!isEdit) {
-    if (file === null) {
+    if (mainImage === null) {
       errors.mainImageError = "Zdjęcie jest wymagane!";
     }
   }
@@ -52,7 +47,7 @@ export const postValidation = (postValues ,isEdit) => {
   }
 }
 
-export const moderatorValidation = (userValues, repeat_password) => {
+export const moderatorValidation = (userValues, repeatPassword) => {
   const { firstName, lastName, username, email, password } = userValues;
   let errors = {};
 
@@ -80,13 +75,13 @@ export const moderatorValidation = (userValues, repeat_password) => {
     errors.passwordError = "Hasło jest wymagane!";
   }
 
-  if (repeat_password === '' || undefined) {
-    errors.repeat_passwordError = "Powtórzenie hasła jest wymagane!";
+  if (repeatPassword === '' || undefined) {
+    errors.repeatPasswordError = "Powtórzenie hasła jest wymagane!";
   }
 
-  if (password && repeat_password !== '') {
-    if (password !== repeat_password) {
-      errors.repeat_passwordError = "Hasła się nie zgadzają!"
+  if (password && repeatPassword !== '') {
+    if (password !== repeatPassword) {
+      errors.repeatPasswordError = "Hasła się nie zgadzają!"
     }
   }
 
@@ -126,7 +121,7 @@ export const newFullNameValidation = (fullNameValues) => {
 }
 
 export const newEmailValidation = (emailValues) => {
-  const { email, repeat_email } = emailValues;
+  const { email, repeatEmail } = emailValues;
   let errors = {};
 
   const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -137,13 +132,13 @@ export const newEmailValidation = (emailValues) => {
     errors.emailError = "Nieprawidłowy e-mail!";
   }
 
-  if (repeat_email === '' || undefined) {
-    errors.repeat_emailError = "Powtórzenie hasła jest wymagane!";
+  if (repeatEmail === '' || undefined) {
+    errors.repeatEmailError = "Powtórzenie hasła jest wymagane!";
   }
 
-  if (email && repeat_email !== '') {
-    if (email !== repeat_email) {
-      errors.repeat_emailError = "E-mail się nie zgadza!"
+  if (email && repeatEmail !== '') {
+    if (email !== repeatEmail) {
+      errors.repeatEmailError = "E-mail się nie zgadza!"
     }
   }
 
@@ -159,24 +154,24 @@ export const newEmailValidation = (emailValues) => {
 }
 
 export const newPasswordValidation = (passwordValues) => {
-  const { old_password, new_password, repeat_new_password } = passwordValues;
+  const { oldPassword, newPassword, repeatNewPassword } = passwordValues;
   let errors = {};
 
-  if (old_password === '' || undefined) {
-    errors.old_passwordError = "Stare hasło jest wymagane!";
+  if (oldPassword === '' || undefined) {
+    errors.oldPasswordError = "Stare hasło jest wymagane!";
   }
 
-  if (new_password === '' || undefined) {
-    errors.new_passwordError = "Nowe hasło jest wymagane!";
+  if (newPassword === '' || undefined) {
+    errors.newPasswordError = "Nowe hasło jest wymagane!";
   }
 
-  if (repeat_new_password === '' || undefined) {
-    errors.repeat_new_passwordError = "Powtórzenie nowego hasła jest wymagane!";
+  if (repeatNewPassword === '' || undefined) {
+    errors.repeatNewPasswordError = "Powtórzenie nowego hasła jest wymagane!";
   }
 
-  if (new_password && repeat_new_password !== '') {
-    if (new_password !== repeat_new_password) {
-      errors.repeat_new_passwordError = "Hasła się nie zgadzają!"
+  if (newPassword && repeatNewPassword !== '') {
+    if (newPassword !== repeatNewPassword) {
+      errors.repeatNewPasswordError = "Hasła się nie zgadzają!"
     }
   }
 

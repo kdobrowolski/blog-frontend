@@ -13,7 +13,7 @@
         <p class="content_description">
           {{ description }}
         </p>
-        <Button class="content_btn--left content_btn--bottom" value="Czytaj dalej" :href="`/posts/${postId}`" />
+        <Button element="nuxt-link" class="content_btn--left content_btn--bottom" value="Czytaj dalej" :href="`/posts/${postId}`" />
       </div>
     </div>
   </div>

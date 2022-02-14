@@ -1,7 +1,7 @@
 <template>
   <div class="Admin_moderators_add_page">
     <ModeratorForm />
-    <Button value="Wróć" :href="'/admin/moderators'" />
+    <Button element="nuxt-link" value="Wróć" :href="'/admin/moderators'" />
   </div>
 </template>
 

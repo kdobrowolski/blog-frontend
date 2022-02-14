@@ -1,22 +1,26 @@
 <template>
   <div class="button_container">
-    <template v-if="!isSearch && !isSubmit">
-      <NuxtLink :to="{ path: this.href }">
-        <button class="btn" :value="value">
-          {{ value }}
-        </button>
+    <template v-if="element === 'nuxt-link'">
+      <NuxtLink class="container_content" :to="{ path: this.href }">
+        {{ value }}
       </NuxtLink>
     </template>
-    <template v-else-if="isSubmit">
-      <button type="submit" class="btn" :value="value">
+
+    <template v-else-if="element === 'button'">
+      <button type="button" class="btn container_content" :value="value">
         {{ value }}
       </button>
     </template>
-    <template v-else>
-      <NuxtLink :to="{ path: '/search/' + this.input }">
-        <button class="btn" :value="value">
-          {{ value }}
-        </button>
+
+    <template v-else-if="element === 'submit'">
+      <button type="submit" class="btn container_content" :value="value">
+        {{ value }}
+      </button>
+    </template>
+
+    <template v-else-if="element === 'search'">
+      <NuxtLink class="container_content" :to="{ path: '/search/' + this.input }">
+        {{ value }}
       </NuxtLink>
     </template>
   </div>
@@ -43,7 +47,14 @@ export default {
     },
     isSubmit: {
       type: Boolean
+    },
+    element: {
+      type: String,
+      default: 'button'
     }
+  },
+  mounted() {
+    console.log(this.element);
   },
 
   methods: {

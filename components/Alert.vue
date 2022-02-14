@@ -16,7 +16,7 @@ export default {
   components: {
       Button
   },
-  props: ['type'],
+  props: ['type', 'filename'],
   methods: {
     async func(type) {
         if (type == 'deletePost') {
@@ -39,11 +39,23 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        } else if (type == 'deleteImage') {
+            try {
+                const payload = {
+                    filename: this.filename
+                }
+                await this.$store.dispatch('gallery/deleteImage', payload);
+                await this.$store.dispatch('gallery/getImages');
+                const images = await this.$store.getters['gallery/getImages'];
+                this.$emit('images', images);
+                this.$emit('hide', false);
+            } catch (err) {
+                console.log(err);
+            }
         }
     },
 
     close() {
-        console.log('ELO');
         this.$emit('hide', false);
     }
   }

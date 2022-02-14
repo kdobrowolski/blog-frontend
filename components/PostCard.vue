@@ -14,8 +14,8 @@
       </p>
     </div>
     <div class="card_btn">
-      <Button v-if="!isAdmin" class="btn--center" value="Czytaj dalej" :href="'/posts/' + postId" />
-      <Button v-else class="btn--center" value="Zarządzaj" :href="'/admin/posts/' + postId" />
+      <Button element="nuxt-link" v-if="!isAdmin" class="btn--center" value="Czytaj dalej" :href="'/posts/' + postId" />
+      <Button element="nuxt-link" v-else class="btn--center" value="Zarządzaj" :href="'/admin/posts/' + postId" />
     </div>
   </div>
 </template>

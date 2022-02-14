@@ -13,7 +13,7 @@
           :title="post.title"
           :description="post.description"
           :tags="post.tags"
-          :date="post.date"
+          :date="post.created_at"
           :image="post.mainImage"
         />
       <div class="pagination_container">

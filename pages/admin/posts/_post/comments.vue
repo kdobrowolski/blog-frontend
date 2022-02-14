@@ -1,6 +1,6 @@
 <template>
   <div class="Admin_post_page">
-    <Button value="Wróć" :href="`/admin/posts/${id}`" />
+    <Button element="nuxt-link" value="Wróć" :href="`/admin/posts/${id}`" />
     <div class="page_comments_container">
       <CommentsContainer :comments="commentsData" is-admin />
     </div>

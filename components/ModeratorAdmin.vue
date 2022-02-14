@@ -1,7 +1,7 @@
 <template>
   <div class="Admin_moderator">
     <ModeratorCard :firstName="firstName" :lastName="lastName" :email="email"/>
-    <Button v-if="userIsAdmin ? true : false" value="Zarządzaj" :href="`/admin/moderators/${id}`" />
+    <Button v-if="userIsAdmin ? true : false" element="nuxt-link" value="Zarządzaj" :href="`/admin/moderators/${id}`" />
   </div>
 </template>
 

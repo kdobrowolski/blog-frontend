@@ -1,12 +1,12 @@
 <template>
   <div class="Admin_about">
     <form class="about_form" @submit.prevent="submit($event)">
-        <Editor @content="updateContent" :value-input="aboutMe ? aboutMe : false"/>
+        <Editor :images="images" @content="updateContent" :value-input="aboutMe ? aboutMe : false"/>
         <p v-if="success" class="form_success">Zaaktualizowano pomyślnie!</p>
         <p v-if="error" class="form_error">Wystąpił błąd!</p>
-        <Button value="Zaaktualizuj" is-submit />
+        <Button element="submit" value="Zaaktualizuj" />
     </form>
-    <Button class="page_btn--width" value="Wróć" href="/admin" />
+    <Button element="nuxt-link" class="page_btn--width" value="Wróć" href="/admin" />
   </div>
 </template>
 
@@ -48,10 +48,12 @@ export default {
   },
   async asyncData({ store }) {
     await store.dispatch('getAboutMe');
+    await store.dispatch('gallery/getImages');
+    const images = await store.getters['gallery/getImages'];
 
     const aboutMe = store.getters['getAboutMeContent'];
 
-    return { aboutMe };
+    return { aboutMe, images };
   }
 };
 

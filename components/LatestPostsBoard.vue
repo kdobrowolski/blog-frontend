@@ -10,7 +10,7 @@
           :title="latestPost.title"
           :description="latestPost.description"
           :tags="latestPost.tags"
-          :date="latestPost.date"
+          :date="latestPost.created_at"
           :image="latestPost.mainImage"
         />
       </swiper-slide>

@@ -1,20 +1,20 @@
 <template>
-  <div class="Admin_post_add_page">
-    <Button element="nuxt-link" value="Wróć" href="/admin/posts" />
-    <PostForm form-type="create" :images="images"/>
+  <div class="Admin_gallery">
+    <Button element="nuxt-link" class="page_btn--width" value="Wróć" href="/admin" />
+    <GalleryContainer :images="images"/>
   </div>
 </template>
 
 <script>
-import PostForm from '../../../components/PostForm';
-import Button from '../../../components/Button';
+import Button from '../../components/Button';
+import GalleryContainer from '../../components/GalleryContainer';
 
 export default {
-  name: 'AdminPostPage',
+  name: 'AdminGallery',
   layout: 'admin',
   components: {
-    PostForm,
     Button,
+    GalleryContainer
   },
   middleware: ['logged-in'],
   async asyncData({ store }) {
@@ -26,10 +26,10 @@ export default {
       console.log(error);
     }
   }
-}
+};
 
 </script>
 
 <style lang="scss" scoped>
-  @import '~/assets/scss/pages/admin/posts/add.scss';
+
 </style>

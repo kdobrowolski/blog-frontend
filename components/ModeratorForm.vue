@@ -10,12 +10,11 @@
     <p v-if="errors.usernameError" class="form_error">{{ errors.usernameError }}</p>
     <Input v-model="password" type="password" placeholder="Hasło" label="Hasło" name="password" />
     <p v-if="errors.passwordError" class="form_error">{{ errors.passwordError }}</p>
-    <Input v-model="repeat_password" type="password" placeholder="Powtórz hasło" label="Powtórz hasło" name="repeat_password" />
-    <p v-if="errors.repeat_passwordError" class="form_error">{{ errors.repeat_passwordError }}</p>
+    <Input v-model="repeatPassword" type="password" placeholder="Powtórz hasło" label="Powtórz hasło" name="repeat_password" />
+    <p v-if="errors.repeatPasswordError" class="form_error">{{ errors.repeatPasswordError }}</p>
     <p v-if="success" class="form_success">Dodano nowego moderatora pomyślnie!</p>
     <p v-if="errors.existUser" class="form_error">Istnieje juz taki uzytkownik!</p>
-    <Button v-if="!moderatorExist" value="Utwórz" is-submit />
-    <Button v-else value="Zaaktualizuj" />
+    <Button element="submit" v-if="!moderatorExist" value="Utwórz" />
   </form>
 </template>
 
@@ -36,14 +35,14 @@ export default {
     email: '',
     username: '',
     password: '',
-    repeat_password: '',
+    repeatPassword: '',
     errors: {
       firstNameError: null,
       lastNameError: null,
       emailError: null,
       usernameError: null,
       passwordError: null,
-      repeat_passwordError: null,
+      repeatPasswordError: null,
       existUser: false
     },
     success: false
@@ -61,7 +60,7 @@ export default {
         emailError: null,
         usernameError: null,
         passwordError: null,
-        repeat_passwordError: null,
+        repeatPasswordError: null,
         existUser: false,
       }
       this.success = false;
@@ -74,8 +73,7 @@ export default {
         password: this.password,
       }
 
-      const validation = moderatorValidation(user, this.repeat_password);
-      console.log(validation);
+      const validation = moderatorValidation(user, this.repeatPassword);
 
       if (validation.errors) {
         const { errors } = validation;
@@ -86,7 +84,7 @@ export default {
           emailError: errors.emailError,
           usernameError: errors.usernameError,
           passwordError: errors.passwordError,
-          repeat_passwordError: errors.repeat_passwordError,
+          repeatPasswordError: errors.repeat_passwordError,
         }
       } else {
         try {
@@ -99,7 +97,6 @@ export default {
           this.success = true;
         } catch (error) {
           this.errors.existUser = true;
-          console.log(console.log(error));
         }
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="Admin_moderators_page">
-    <Button v-if="user.isAdmin ? true : false" value="Dodaj moderatora" href="/admin/moderators/add" />
-    <Button value="Wróć" href="/admin" />
+    <Button element="nuxt-link" v-if="user.isAdmin ? true : false" value="Dodaj moderatora" href="/admin/moderators/add" />
+    <Button element="nuxt-link" value="Wróć" href="/admin" />
     <h2 class="page_header_moderators">Lista moderatorów</h2>
     <ModeratorAdmin 
       v-for="moderator in moderators" 

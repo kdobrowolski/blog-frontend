@@ -33,7 +33,7 @@ export const getters = {
 
 export const actions = {
   async login ({ commit }, payload) {
-    const { data } = await this.$axios.$post('/api/users/login', payload, { progress: false });
+    const { data } = await this.$axios.$post('/api/auth/login', payload, { progress: false });
   },
 
   async authMe ({ state, commit, dispatch }, { app, accessToken }) {
@@ -110,12 +110,12 @@ export const actions = {
     console.log(data);
     console.log(app);
 
-    app.$cookiz.set('access_token', data.access_token, {
+    app.$cookiz.set('access_token', data.accessToken, {
       expires: new Date(Date.now() + 300000),
       path: '/'
     });
 
-    app.$cookiz.set('refresh_token', data.refresh_token, {
+    app.$cookiz.set('refresh_token', data.refreshToken, {
       httpOnly: true,
       expires: new Date(Date.now() + 604800000),
       path: '/'
@@ -123,7 +123,7 @@ export const actions = {
 
     if (res) {
       const authMePayload = {
-        accessToken: data.access_token,
+        accessToken: data.accessToken,
         app
       }
       await dispatch('authMe', authMePayload)
@@ -135,37 +135,37 @@ export const actions = {
   async logout ({ commit }) {
     Cookie.remove('access_token');
     Cookie.remove('refresh_token');
-    await this.$axios.$get('/api/users/logout', { progress: false });
+    await this.$axios.$post('/api/auth/logout', { progress: false });
     commit('SET_USER', null);
   },
 
   async createModerator ({ commit }, payload) {
     const accessToken = Cookie.get('access_token');
-    await this.$axios.$post('/api/users/register', payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$post('/api/user/register', payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
   },
 
   async deleteModerator ({ commit }, payload) {
     const accessToken = Cookie.get('access_token');
-    await this.$axios.$delete(`/api/users/${payload}`, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$delete(`/api/user/${payload}`, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
   },
 
   async getModerators ({ commit }, payload) {
-    const res = await this.$axios.$get('/api/users', { progress: false });
+    const res = await this.$axios.$get('/api/user/moderator', { progress: false });
     commit('SET_MODERATORS', res.moderators);
   },
 
   async changeFullName ({ commit }, payload) {
     const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/users/${payload.id}/fullname`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$put(`/api/user/${payload.id}/fullname`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
   },
 
   async changeEmail ({ commit }, payload) {
     const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/users/${payload.id}/email`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$put(`/api/user/${payload.id}/email`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
   },
 
   async changePassword ({ commit }, payload) {
     const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/users/${payload.id}/password`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$put(`/api/user/${payload.id}/password`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
   }
 }

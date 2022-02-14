@@ -14,7 +14,7 @@
       <p v-if="errors.messageError" class="form_error">{{ errors.messageError }}</p>
       <p v-if="errors.failed" class="form_error">Wystąpił błąd!</p>
       <p v-if="success" class="form_success">Wiadomość została wysłana!</p>
-      <Button value="Wyślij" is-submit />
+      <Button element="submit" value="Wyślij" />
     </form>
   </div>
 </template>

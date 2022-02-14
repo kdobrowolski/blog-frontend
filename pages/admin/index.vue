@@ -4,9 +4,10 @@
       Jesteś zalogowany jako
       <span class="user--color">{{ getFullName }}</span>
     </p>
-    <Button class="page_btn--width" value="O mnie" href="/admin/aboutme" />
-    <Button class="page_btn--width" value="Posty" href="/admin/posts" />
-    <Button class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
+    <Button element="nuxt-link" class="page_btn--width" value="O mnie" href="/admin/aboutme" />
+    <Button element="nuxt-link" class="page_btn--width" value="Posty" href="/admin/posts" />
+    <Button element="nuxt-link" class="page_btn--width" value="Galeria" href="/admin/gallery" />
+    <Button element="nuxt-link" class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
     <Button class="page_btn--width" value="Wyloguj się" @click.native="logout" />
   </div>
 </template>

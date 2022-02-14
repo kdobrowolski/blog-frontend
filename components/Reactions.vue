@@ -86,8 +86,7 @@ export default {
         this.likesCounter = post.likes_count;
         this.heartsCounter = post.hearts_count;
         this.starsCounter = post.stars_count;
-
-        console.log('dodano')
+        
       } catch (error) {
         console.log(error);
       }

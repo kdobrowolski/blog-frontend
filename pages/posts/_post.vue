@@ -3,7 +3,7 @@
     <img class="page_main_image" :src="`/public/${post.mainImage}`" alt="post_image" />
     <div class="page_info">
       <span class="info_tags"> {{ post.tags }} </span>
-      <span class="info_date"> - {{ post.date | formatDate }}</span>
+      <span class="info_date"> - {{ post.created_at | formatDate }}</span>
     </div>
     <h2 class="page_header">{{ post.title }}</h2>
     <div class="page_content" v-html="post.content"></div>
@@ -32,6 +32,7 @@ export default {
       const comments = await store.dispatch('comments/getComments', payload);
       const post = data.post;
       const commentsData = await store.getters['comments/getComments'];
+      console.log(post);
 
       const reactionType = reactionData.res.reaction_type;
       return { post, commentsData, reactionType }

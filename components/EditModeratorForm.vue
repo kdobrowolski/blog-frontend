@@ -3,21 +3,21 @@
       <template v-if="newEmailForm">
           <Input v-model="email" type="email" placeholder="Nowy e-mail" label="Nowy e-mail" name="email" />
           <p v-if="errors.emailError" class="form_error">{{ errors.emailError }}</p>
-          <Input v-model="repeat_email" type="email" placeholder="Powtórz e-mail" label="Powtórz e-mail" name="repeat_email" />
-          <p v-if="errors.repeat_emailError" class="form_error">{{ errors.repeat_emailError }}</p>
+          <Input v-model="repeatEmail" type="email" placeholder="Powtórz e-mail" label="Powtórz e-mail" name="repeat_email" />
+          <p v-if="errors.repeatEmailError" class="form_error">{{ errors.repeatEmailError }}</p>
           <p v-if="successEmail" class="form_success">Pomyślnie zmieniono adres e-mail!</p>
-          <Button value="Zmień" is-submit />
+          <Button element="submit" value="Zmień" />
       </template>
       <template v-else-if="newPasswordForm">
-          <Input v-model="old_password" type="password" placeholder="Stare hasło" label="Stare hasło" name="old_password" />
-          <p v-if="errors.old_passwordError" class="form_error">{{ errors.old_passwordError }}</p>
-          <Input v-model="new_password" type="password" placeholder="Nowe hasło" label="Nowe hasło" name="new_password" />
-          <p v-if="errors.new_passwordError" class="form_error">{{ errors.new_passwordError }}</p>
-          <Input v-model="repeat_new_password" type="password" placeholder="Powtórz nowe hasło" label="Powtórz nowe hasło" name="repeat_new_password" />
-          <p v-if="errors.repeat_new_passwordError" class="form_error">{{ errors.repeat_new_passwordError }}</p>
-          <p v-if="errors.wrong_old_password" class="form_error">Stare hasło jest niepoprawne!</p>
+          <Input v-model="oldPassword" type="password" placeholder="Stare hasło" label="Stare hasło" name="old_password" />
+          <p v-if="errors.oldPasswordError" class="form_error">{{ errors.oldPasswordError }}</p>
+          <Input v-model="newPassword" type="password" placeholder="Nowe hasło" label="Nowe hasło" name="new_password" />
+          <p v-if="errors.newPasswordError" class="form_error">{{ errors.newPasswordError }}</p>
+          <Input v-model="repeatNewPassword" type="password" placeholder="Powtórz nowe hasło" label="Powtórz nowe hasło" name="repeat_new_password" />
+          <p v-if="errors.repeatNewPasswordError" class="form_error">{{ errors.repeatNewPasswordError }}</p>
+          <p v-if="errors.wrongOldPassword" class="form_error">Stare hasło jest niepoprawne!</p>
           <p v-if="successPassword" class="form_success">Pomyślnie zmieniono hasło!</p>
-          <Button value="Zmień" is-submit />
+          <Button element="submit" value="Zmień" />
       </template>
       <template v-else-if="changeFullnameForm">
           <Input v-model="firstName" type="text" placeholder="Imię" label="Imię" name="firstName" />
@@ -25,7 +25,7 @@
           <Input v-model="lastName" type="text" placeholder="Nazwisko" label="Nazwisko" name="lastName" />
           <p v-if="errors.lastNameError" class="form_error">{{ errors.lastNameError }}</p>
           <p v-if="successFullName" class="form_success">Pomyślnie zmieniono imie i nazwisko!</p>
-          <Button value="Zmień" is-submit />
+          <Button element="submit" value="Zmień" />
       </template>
   </form>
 </template>
@@ -43,21 +43,21 @@ export default {
   },
   data: () => ({
     email: '',
-    repeat_email: '',
-    old_password: '',
-    new_password: '',
-    repeat_new_password: '',
+    repeatEmail: '',
+    oldPassword: '',
+    newPassword: '',
+    repeatNewPassword: '',
     firstName: '',
     lastName: '',
     errors: {
       firstNameError: null,
       lastNameError: null,
       emailError: null,
-      repeat_emailError: null,
-      old_passwordError: null,
-      new_passwordError: null,
-      repeat_new_passwordError: null,
-      wrong_old_password: false
+      repeatEmailError: null,
+      oldPasswordError: null,
+      newPasswordError: null,
+      repeatNewPasswordError: null,
+      wrong_oldPassword: false
     },
     successEmail: false,
     successPassword: false,
@@ -77,11 +77,11 @@ export default {
         firstNameError: null,
         lastNameError: null,
         emailError: null,
-        repeat_emailError: null,
-        old_passwordError: null,
-        new_passwordError: null,
-        repeat_new_passwordError: null,
-        wrong_old_password: null
+        repeatEmailError: null,
+        oldPasswordError: null,
+        newPasswordError: null,
+        repeatNewPasswordError: null,
+        wrongOldPassword: null
       }
 
       this.successEmail = false;
@@ -107,7 +107,6 @@ export default {
         } else {
           try {
             const id = this.$route.params.moderator;
-            console.log(id);
             const payload = {
               ...fullname,
               id
@@ -125,7 +124,7 @@ export default {
       else if (type === 'email') {
         const email = {
           email: this.email,
-          repeat_email: this.repeat_email
+          repeat_email: this.repeatEmail
         }
         console.log(email);
         const validation = newEmailValidation(email);
@@ -135,7 +134,7 @@ export default {
           this.errors = {
             ...this.errors,
             emailError: errors.emailError,
-            repeat_emailError: errors.repeat_emailError
+            repeatEmailError: errors.repeatEmailError
           }
         } else {
           try {
@@ -155,12 +154,10 @@ export default {
       // PASSWORD UPDATE
       else if (type === 'password') {
         const password = {
-          old_password: this.old_password,
-          new_password: this.new_password,
-          repeat_new_password: this.repeat_new_password
+          old_password: this.oldPassword,
+          new_password: this.newPassword,
+          repeat_new_password: this.repeatNewPassword
         }
-
-        console.log(password);
 
         const validation = newPasswordValidation(password);
 
@@ -168,9 +165,9 @@ export default {
           const { errors } = validation;
           this.errors = {
             ...this.errors,
-            old_passwordError: errors.old_passwordError,
-            new_passwordError: errors.new_passwordError,
-            repeat_new_passwordError: errors.repeat_new_passwordError
+            oldPasswordError: errors.oldPasswordError,
+            newPasswordError: errors.newPasswordError,
+            repeatNewPasswordError: errors.repeatNewPasswordError
           }
         } else {
           try {
@@ -183,7 +180,7 @@ export default {
             await this.$store.dispatch('users/changePassword', payload);
             this.successPassword = true;
           } catch (error) {
-            this.errors.wrong_old_password = true;
+            this.errors.wrongOldPassword = true;
             console.log(error);
           }
         }

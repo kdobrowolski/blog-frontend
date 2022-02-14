@@ -10,7 +10,7 @@
         <Input v-model="content" class="form_input" placeholder="Treść" name="content" label="Treść" is-textarea />
         <p v-if="errors.contentError" class="form_error">{{ errors.contentError }}</p>
         <p v-if="success" class="form_success">Dodano komentarz!</p>
-        <Button class="form_btn" value="Dodaj komentarz" is-submit />
+        <Button element="submit" class="form_btn" value="Dodaj komentarz" />
       </form>
     </template>
     <h2 v-if="Object.keys(commentsData).length === 0" class="container_header">
