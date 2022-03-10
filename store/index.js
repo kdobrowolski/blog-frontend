@@ -28,7 +28,7 @@ export const actions = {
     const headers = (req && req.headers) ? Object.assign({}, req.headers) : {}
     const xForwardedFor = headers['x-forwarded-for'];
     const xRealIp = headers['x-real-ip'];
-    commit('SET_IP', '100.100.10.33');
+    commit('SET_IP', xForwardedFor | xRealIp);
     const path = await ctx.route.path;
     if (!path.match(/admin.*/)) return;
     try {
