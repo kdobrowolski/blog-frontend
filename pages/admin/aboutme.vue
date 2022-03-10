@@ -6,7 +6,7 @@
         <p v-if="error" class="form_error">Wystąpił błąd!</p>
         <Button element="submit" value="Zaaktualizuj" />
     </form>
-    <Button element="nuxt-link" class="page_btn--width" value="Wróć" href="/admin" />
+    <Button element="nuxt-link" class="page_btn--margin page_btn--width" value="Wróć" href="/admin" />
   </section>
 </template>
 
