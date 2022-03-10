@@ -1,0 +1,46 @@
+@import './main.scss';
+@import './variables.scss';
+@import './mixins.scss';
+
+// components
+
+@import './components/Alert.scss';
+@import './components/Button.scss';
+@import './components/Comment.scss';
+@import './components/CommentsContainer.scss';
+@import './components/EditUserForm.scss';
+@import './components/Editor.scss';
+@import './components/Footer.scss';
+@import './components/Input.scss';
+@import './components/LatestPost.scss';
+@import './components/LatestPostsBoard.scss';
+@import './components/UserAdmin.scss';
+@import './components/UserCard.scss';
+@import './components/UserForm.scss';
+@import './components/Nav.scss';
+@import './components/PostCard.scss';
+@import './components/PostForm.scss';
+@import './components/Reactions.scss';
+@import './components/AboutContainer.scss';
+@import './components/GalleryContainer.scss';
+
+// pages
+
+@import './pages/About.scss';
+@import './pages/Contact.scss';
+@import './pages/HomePage.scss';
+@import './pages/admin/index.scss';
+@import './pages/admin/Login.scss';
+@import './pages/admin/users/add.scss';
+@import './pages/admin/users/index.scss';
+@import './pages/admin/posts/_post.scss';
+@import './pages/admin/posts/add.scss';
+@import './pages/admin/posts/index.scss';
+@import './pages/posts/_post.scss';
+@import './pages/posts/index.scss';
+@import './pages/search/_search.scss';
+
+// layouts
+
+@import './layouts/Admin.scss';
+@import './layouts/Default.scss';
