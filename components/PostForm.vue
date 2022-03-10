@@ -1,5 +1,5 @@
 <template>
-  <div class="Post_form">
+  <section class="Post_form">
     <form class="form_container" @submit.prevent="submit($event)">
       <Input type="text" v-model="title" placeholder="Tytuł" :value-input="formValue ? formValue.title : false" label="Tytuł" name="title" />
       <p v-if="errors.titleError" class="form_error">{{ errors.titleError }}</p>
@@ -31,35 +31,27 @@
       <Button element="submit" v-else value="Dodaj post" />
     </form>
     <template v-if="togglePreview">
-      <div class="form_preview">
+      <section class="form_preview">
         <div class="preview_content">
           <img class="page_main_image" :src="`/public/${mainImage}`" alt="post_image" />
-          <div class="page_info">
+          <section class="page_info">
             <span class="info_tags"> {{ tags }} </span>
             <span class="info_date"> - {{ date | formatDate }}</span>
-          </div>
+          </section>
           <h2 class="page_header">{{ title }}</h2>
-          <div class="page_content" v-html="content"></div>
+          <section class="page_content" v-html="content"></section>
           <Button value="Zakończ" @click.native="preview(false)" />
         </div>
-      </div>
+      </section>
     </template>
-  </div>
+  </section>
 </template>
 
 <script>
-import Editor from './Editor';
-import Input from './Input';
-import Button from './Button';
 import { postValidation } from '../helpers/validationForms';
 
 export default {
   name: 'PostForm',
-  components: {
-    Editor,
-    Input,
-    Button
-  },
   data: () => ({
     imagesArr: [],
     mainImage: null,
@@ -96,7 +88,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.formValue);
     if (this.formValue) {
       this.title = this.formValue.title;
       this.description = this.formValue.description;
@@ -124,7 +115,7 @@ export default {
       this.imagesArr = images;
       this.showGallery = true;
     },
-    async submit(e) {
+    resetStatus() {
       this.errors = {
         titleError: null,
         descriptionError: null,
@@ -133,6 +124,9 @@ export default {
         contentError: null
       }
       this.success = false;
+    },
+    async submit(e) {
+      this.resetStatus();
 
       const post = {
         title: this.title,
@@ -161,68 +155,47 @@ export default {
         }
       } else {
         if (this.formType === 'create') {
-          try {
-            const { id } = this.$store.getters['users/getUser'];
-            const payload = {
-              ...post,
-              user_id: id
-            }
-
-            await this.$store.dispatch('posts/createPost', payload);
-            this.success = true;
-            this.successType = "Post dodano pomyślnie!";
-
-          } catch (error) {
-            console.log(error);
-          }
+          this.createPost();
         } else if (this.formType === 'edit') {
-          try {
-            const { id } = this.$store.getters['users/getUser'];
-            const post_id = this.$route.params.post;
-
-            const payload = {
-              ...post,
-              user_id: id,
-              post_id: post_id,
-              mainImage: this.mainImage
-            }
-
-            await this.$store.dispatch('posts/editPost', payload);
-            this.success = true;
-            this.successType = "Post zaaktualizowano pomyślnie!";
-          } catch (error) {
-            console.log(error);
-          }
+          this.editPost();
         }
+      }
+    },
+    async createPost() {
+      try {
+        const { id } = this.$store.getters['users/getUser'];
+        const payload = {
+          ...post,
+          userId: id
+        }
+
+        await this.$store.dispatch('posts/createPost', payload);
+        this.success = true;
+        this.successType = "Post dodano pomyślnie!";
+
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async editPost() {
+      try {
+        const { id } = this.$store.getters['users/getUser'];
+        const postId = this.$route.params.post;
+
+        const payload = {
+          ...post,
+          userId: id,
+          postId: postId,
+          mainImage: this.mainImage
+        }
+
+        await this.$store.dispatch('posts/editPost', payload);
+        this.success = true;
+        this.successType = "Post zaaktualizowano pomyślnie!";
+      } catch (error) {
+        console.log(error);
       }
     }
   }
 };
 </script>
-
-<style lang="scss" >
-  @import '~/assets/scss/components/PostForm.scss';
-
-  #form_gallery {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw !important;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: white;
-    z-index: 999 !important;
-  }
-
-  .container_header {
-    margin-top: 30px;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #007aff;
-  }
-
-  .container_image {
-    margin-top: 25px;
-    width: 250px;
-  }
-</style>

@@ -48,7 +48,7 @@ export const postValidation = (postValues ,isEdit) => {
 }
 
 export const moderatorValidation = (userValues, repeatPassword) => {
-  const { firstName, lastName, username, email, password } = userValues;
+  const { firstName, lastName, name, email, password } = userValues;
   let errors = {};
 
   if (firstName === '' || undefined) {
@@ -59,8 +59,8 @@ export const moderatorValidation = (userValues, repeatPassword) => {
     errors.lastNameError = "Nazwisko jest wymagane!";
   }
 
-  if (username === '' || undefined) {
-    errors.usernameError = "Nazwa użytkownika jest wymagana!";
+  if (name === '' || undefined) {
+    errors.nameError = "Nazwa użytkownika jest wymagana!";
   }
 
   const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -97,9 +97,11 @@ export const moderatorValidation = (userValues, repeatPassword) => {
 
 }
 
-export const newFullNameValidation = (fullNameValues) => {
-  const { firstName, lastName } = fullNameValues;
+export const updateUserValidation = (userValues) => {
+  const { firstName, lastName, email } = userValues;
   let errors = {};
+
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   if (firstName === '' || undefined) {
     errors.firstNameError = "Imię jest wymagane!";
@@ -109,37 +111,10 @@ export const newFullNameValidation = (fullNameValues) => {
     errors.lastNameError = "Nazwisko jest wymagane!";
   }
 
-  if (Object.keys(errors).length === 0) {
-    return {
-      success: true
-    }
-  } else {
-    return {
-      errors
-    }
-  }
-}
-
-export const newEmailValidation = (emailValues) => {
-  const { email, repeatEmail } = emailValues;
-  let errors = {};
-
-  const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
   if (email === '' || undefined) {
     errors.emailError = "E-mail jest wymagany!";
   } else if (!email.match(regexEmail)) {
     errors.emailError = "Nieprawidłowy e-mail!";
-  }
-
-  if (repeatEmail === '' || undefined) {
-    errors.repeatEmailError = "Powtórzenie hasła jest wymagane!";
-  }
-
-  if (email && repeatEmail !== '') {
-    if (email !== repeatEmail) {
-      errors.repeatEmailError = "E-mail się nie zgadza!"
-    }
   }
 
   if (Object.keys(errors).length === 0) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="Main_posts_page">
+  <section class="Main_posts_page">
     <div class="page_posts">
       <h1 class="posts_header">
         Artykuły
@@ -26,27 +26,20 @@
         ></b-pagination>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import PostCard from '../../components/PostCard';
 
 export default {
-  layout: 'blog',
   name: 'PostsPage',
-  components: {
-    PostCard
-  },
   data: () => ({
     perPage: 12,
     currentPage: 1
   }),
   computed: {
-    itemsForList: {
-      get: function () {
-        return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
-      }
+    itemsForList() {
+      return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
     }
   },
   async asyncData({ store }) {
@@ -62,7 +55,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '../../assets/scss/pages/posts/index.scss';
-</style>

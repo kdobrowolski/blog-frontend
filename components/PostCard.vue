@@ -1,7 +1,7 @@
 <template>
-  <div class="Post_card">
+  <article class="Post_card">
     <img class="card_image" :src="`/public/${image}`" alt="card_image">
-    <div class="card_content">
+    <section class="card_content">
       <div class="content_info">
         <span class="info_tags">{{ tags }}</span>
         <span class="info_date"> - {{ date | formatDate }}</span>
@@ -12,22 +12,18 @@
       <p class="content_description">
         {{ description }}
       </p>
-    </div>
-    <div class="card_btn">
+    </section>
+    <section class="card_btn">
       <Button element="nuxt-link" v-if="!isAdmin" class="btn--center" value="Czytaj dalej" :href="'/posts/' + postId" />
       <Button element="nuxt-link" v-else class="btn--center" value="Zarządzaj" :href="'/admin/posts/' + postId" />
-    </div>
-  </div>
+    </section>
+  </article>
 </template>
 
 <script>
-import Button from './Button';
 
 export default {
   name: 'PostCard',
-  components: {
-    Button
-  },
   props: {
     title: {
       type: String
@@ -54,7 +50,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss">
-  @import '../assets/scss/components/PostCard.scss';
-</style>

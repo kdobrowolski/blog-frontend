@@ -1,5 +1,5 @@
 <template>
-  <div class="Reactions_container">
+  <section class="Reactions_container">
     <h2 class="container_header">
       Reakcje
     </h2>
@@ -15,7 +15,7 @@
       <font-awesome-icon :class="starActive ? 'active_star' : 'icon_star'" icon="star" @click="addReaction('star')"/>
       <span class="icon_count_reactions">{{ starsCounter }}</span>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -32,9 +32,17 @@ export default {
     starsCounter: 0
   }),
   created() {
-    this.likesCounter = this.reactions.likes_count;
-    this.heartsCounter = this.reactions.hearts_count;
-    this.starsCounter = this.reactions.stars_count;
+    this.reactions.map(reaction => {
+      if (reaction.reactionType == "like") {
+        this.likesCounter = reaction.count;
+      }
+      else if (reaction.reactionType == "heart") {
+        this.heartsCounter = reaction.count;
+      }
+      else if (reaction.reactionType == "star") {
+        this.starsCounter = reaction.count;
+      }
+    })
     if (this.reactionType == 'like') {
       this.likeActive = true
     } else if (this.reactionType == 'heart') {
@@ -51,8 +59,8 @@ export default {
         const payload = {
           postId: this.$route.params.post,
           reaction: {
-            reaction_type: type,
-            user_ip: ip
+            reactionType: type,
+            userIp: ip
           }
         };
         if (this.likeActive && type == 'like') {
@@ -81,11 +89,23 @@ export default {
 
         const postId = this.$route.params.post;
         const data = await this.$store.dispatch('posts/getOnePost', postId);
-        const post = data.post;
+        const { reactions } = data.post;
 
-        this.likesCounter = post.likes_count;
-        this.heartsCounter = post.hearts_count;
-        this.starsCounter = post.stars_count;
+        this.likesCounter = 0;
+        this.heartsCounter = 0;
+        this.starsCounter = 0;
+
+        reactions.map(reaction => {
+          if (reaction.reactionType == "like") {
+            this.likesCounter = reaction.count;
+          }
+          else if (reaction.reactionType == "heart") {
+            this.heartsCounter = reaction.count;
+          }
+          else if (reaction.reactionType == "star") {
+            this.starsCounter = reaction.count;
+          }
+        })
         
       } catch (error) {
         console.log(error);
@@ -95,7 +115,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/Reactions.scss';
-</style>

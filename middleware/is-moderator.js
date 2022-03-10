@@ -1,4 +1,4 @@
 export default function ({ store, redirect }) {
     const user = store.getters['users/getUser'];
-    if (user.isAdmin !== 1) return redirect('/admin');
+    if (!user.roles.includes('Admin')) return redirect('/admin');
   }

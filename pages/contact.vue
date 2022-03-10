@@ -1,8 +1,8 @@
 <template>
-  <div class="Main_contact">
-    <h2 class="contact_header">
+  <section class="Main_contact">
+    <h1 class="contact_header">
       Skontaktuj się ze mną
-    </h2>
+    </h1>
     <form class="contact_form" @submit.prevent="submit">
       <Input v-model="fullname" type="text" name="fullname" placeholder="Imię i nazwisko" label="Imię i nazwisko" />
       <p v-if="errors.fullnameError" class="form_error">{{ errors.fullnameError }}</p>
@@ -16,21 +16,14 @@
       <p v-if="success" class="form_success">Wiadomość została wysłana!</p>
       <Button element="submit" value="Wyślij" />
     </form>
-  </div>
+  </section>
 </template>
 
 <script>
-import Input from '../components/Input';
-import Button from '../components/Button';
 import { sendEmailValidation } from '../helpers/validationForms';
 
 export default {
-  layout: 'blog',
   name: 'ContactPage',
-  components: {
-    Input,
-    Button
-  },
   data: () => ({
     fullname: '',
     email: '',
@@ -46,7 +39,7 @@ export default {
     success: false
   }),
   methods: {
-    async submit() {
+    resetErrors() {
       this.errors = {
         fullnameError: null,
         emailError: null,
@@ -54,6 +47,9 @@ export default {
         messageError: null,
         failed: false,
       }
+    },
+    async submit() {
+      this.resetErrors();
 
       this.success = false;
 
@@ -76,10 +72,7 @@ export default {
         }
       } else {
         try {
-          const payload = {
-            ...emailContent
-          }
-          await this.$store.dispatch('sendEmail', payload)
+          await this.$store.dispatch('sendEmail', emailContent)
           this.success = true;
         } catch (error) {
           this.errors.failed = true;
@@ -90,7 +83,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/pages/Contact.scss';
-</style>

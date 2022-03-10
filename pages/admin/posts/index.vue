@@ -5,7 +5,7 @@
     <p class="page_posts_header">
       Lista postów
     </p>
-    <div class="page_posts">
+    <section class="page_posts">
       <PostCard 
           id="post"
           v-for="post in itemsForList"
@@ -28,31 +28,23 @@
           align="center"
         ></b-pagination>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import PostCard from '../../../components/PostCard';
-import Button from '../../../components/Button';
 
 export default {
   name: 'AdminPostsPage',
   layout: 'admin',
-  components: {
-    PostCard,
-    Button,
-  },
   middleware: ['logged-in'],
   data: () => ({
     perPage: 6,
     currentPage: 1
   }),
   computed: {
-    itemsForList: {
-      get: function () {
-        return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
-      }
+    itemsForList() {
+      return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
     }
   },
   async asyncData({ store }) {
@@ -67,7 +59,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/pages/admin/posts/index.scss';
-</style>

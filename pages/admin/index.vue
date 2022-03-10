@@ -1,26 +1,24 @@
 <template>
-  <div class="Admin_home_page">
+  <section class="Admin_home_page">
     <p class="page_active_user">
       Jesteś zalogowany jako
       <span class="user--color">{{ getFullName }}</span>
     </p>
-    <Button element="nuxt-link" class="page_btn--width" value="O mnie" href="/admin/aboutme" />
-    <Button element="nuxt-link" class="page_btn--width" value="Posty" href="/admin/posts" />
-    <Button element="nuxt-link" class="page_btn--width" value="Galeria" href="/admin/gallery" />
-    <Button element="nuxt-link" class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
-    <Button class="page_btn--width" value="Wyloguj się" @click.native="logout" />
-  </div>
+    <section class="page_buttons">
+      <Button element="nuxt-link" class="page_btn--width" value="O mnie" href="/admin/aboutme" />
+      <Button element="nuxt-link" class="page_btn--width" value="Posty" href="/admin/posts" />
+      <Button element="nuxt-link" class="page_btn--width" value="Galeria" href="/admin/gallery" />
+      <Button element="nuxt-link" class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
+      <Button class="page_btn--width" value="Wyloguj się" @click.native="logout" />
+    </section>
+  </section>
 </template>
 
 <script>
-import Button from '../../components/Button';
 
 export default {
   name: 'AdminHomePage',
   layout: 'admin',
-  components: {
-    Button
-  },
   middleware: ['logged-in'],
   computed: {
     getFullName () {
@@ -37,7 +35,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/pages/admin/index.scss';
-</style>

@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import './Button.vue';
 
 export default {
   name: 'Comment',
@@ -44,7 +43,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/Comment.scss';
-</style>

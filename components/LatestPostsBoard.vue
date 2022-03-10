@@ -1,8 +1,8 @@
 <template>
   <section class="Latest_posts_board">
-    <h1 class="board_header">
+    <h2 class="board_header">
       Najnowsze
-    </h1>
+    </h2>
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="latestPost in latestPosts" :key="latestPost.id">
         <LatestPost 
@@ -45,7 +45,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/LatestPostsBoard.scss';
-</style>

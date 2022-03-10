@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 export const state = () => ({
   user: null,
+  updateUser: null,
   moderators: null,
   access_token: null
 })
@@ -15,6 +16,10 @@ export const mutations = {
   SET_MODERATORS (state, moderators) {
     state.moderators = moderators;
   },
+
+  SET_UPDATE_USER (state, user) {
+    state.updateUser = user;
+  }
 }
 
 export const getters = {
@@ -24,6 +29,10 @@ export const getters = {
 
   getUser (state) {
     return state.user;
+  },
+
+  getUpdateUser (state) {
+    return state.updateUser
   },
 
   getModerators (state) {
@@ -39,7 +48,7 @@ export const actions = {
   async authMe ({ state, commit, dispatch }, { app, accessToken }) {
     try {
       this.$axios.setToken(accessToken, 'Bearer');
-      const { user } = await this.$axios.$get('/api/auth/me', { progress: false });
+      const user = await this.$axios.$get('/api/auth/me', { progress: false });
       commit ('SET_USER', user);
     } catch (error) {
       app.router.push('/admin/login');
@@ -47,7 +56,7 @@ export const actions = {
   },
 
   async checkRefreshToken ({ commit, dispatch }, { app, res }) {
-    let path = app.router.history.current.path;
+    const path = app.router.history.current.path;
     let isLoginPath = false;
     if (path === '/admin/login') isLoginPath = true; 
 
@@ -71,7 +80,6 @@ export const actions = {
       let expDate = Date.now() / 1000;
 
       if (expDate > exp) {
-        console.log(payload);
         await dispatch('refreshToken', payload);
         if (isLoginPath) return app.router.push('/admin');
         return;
@@ -107,9 +115,6 @@ export const actions = {
   async setCookies ({ commit, dispatch }, { data, app, res }) {
     app.$cookiz.removeAll();
 
-    console.log(data);
-    console.log(app);
-
     app.$cookiz.set('access_token', data.accessToken, {
       expires: new Date(Date.now() + 300000),
       path: '/'
@@ -140,13 +145,11 @@ export const actions = {
   },
 
   async createModerator ({ commit }, payload) {
-    const accessToken = Cookie.get('access_token');
-    await this.$axios.$post('/api/user/register', payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$post('/api/user', payload, { progress: false });
   },
 
   async deleteModerator ({ commit }, payload) {
-    const accessToken = Cookie.get('access_token');
-    await this.$axios.$delete(`/api/user/${payload}`, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$delete(`/api/user/${payload}`, { progress: false });
   },
 
   async getModerators ({ commit }, payload) {
@@ -154,18 +157,20 @@ export const actions = {
     commit('SET_MODERATORS', res.moderators);
   },
 
-  async changeFullName ({ commit }, payload) {
-    const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/user/${payload.id}/fullname`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+  async getUserById ({ commit }, payload) {
+    const res = await this.$axios.$get(`/api/user/${payload.id}`, { progress: false });
+    commit('SET_UPDATE_USER', res);
+  },
+
+  async updateUser ({ commit }, payload) {
+    await this.$axios.$patch(`/api/user/${payload.id}`, payload, { progress: false });
   },
 
   async changeEmail ({ commit }, payload) {
-    const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/user/${payload.id}/email`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$put(`/api/user/${payload.id}/email`, payload, { progress: false });
   },
 
   async changePassword ({ commit }, payload) {
-    const accessToken = Cookie.get('access_token');
-    await this.$axios.$put(`/api/user/${payload.id}/password`, payload, { headers: { Authorization: `Bearer ${accessToken}` }, progress: false });
+    await this.$axios.$put(`/api/user/${payload.id}/password`, payload, { progress: false });
   }
 }

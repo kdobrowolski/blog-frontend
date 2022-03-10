@@ -1,7 +1,7 @@
 <template>
   <div class="Main_homepage">
     <LatestPostsBoard :posts="posts"/>
-    <div class="homepage_posts">
+    <section class="homepage_posts">
       <h1 class="posts_header">
         Artykuły
       </h1>
@@ -26,30 +26,21 @@
         align="center"
       ></b-pagination>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import PostCard from '../components/PostCard';
-import LatestPostsBoard from '../components/LatestPostsBoard';
 
 export default {
   name: 'HomePage',
-  layout: 'blog',
-  components: {
-    PostCard,
-    LatestPostsBoard
-  },
   data: () => ({
     perPage: 6,
     currentPage: 1
   }),
   computed: {
-    itemsForList: {
-      get: function () {
-        return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
-      }
+    itemsForList() {
+      return this.posts.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
     }
   },
   async asyncData({ store }) {
@@ -64,7 +55,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/pages/HomePage.scss';
-</style>

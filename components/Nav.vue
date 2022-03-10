@@ -1,10 +1,10 @@
 <template>
   <nav class="Nav">
     <div class="Nav_container">
-      <h1 class="container_logo">
+      <span class="container_logo">
         BlogApp
-      </h1>
-      <div class="container_menu" :class="{ 'active': isActive }">
+      </span>
+      <section class="container_menu" :class="{ 'active': isActive }">
         <ul class="menu_list">
           <li class="list_item">
             <NuxtLink to="/" class="item_link" @click.native="closeNavMenu" >Strona główna</NuxtLink>
@@ -20,7 +20,7 @@
           </li>
         </ul>
         <font-awesome-icon class="menu_close_icon" icon="times" @click="toggleNavMenu" />
-      </div>
+      </section>
       <font-awesome-icon class="container_open_icon" icon="bars" @click="toggleNavMenu" />
     </div>
   </nav>
@@ -46,7 +46,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/Nav.scss';
-</style>

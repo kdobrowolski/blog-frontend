@@ -1,7 +1,7 @@
 <template>
-  <div class="Latest_post">
+  <article class="Latest_post">
     <img class="Post_image" :src="`/public/${image}`" alt="post_image">
-    <div class="Post_box">
+    <section class="Post_box">
       <div class="box_content">
         <p class="content_info">
           <span class="info_tags">{{ tags }}</span>
@@ -15,8 +15,8 @@
         </p>
         <Button element="nuxt-link" class="content_btn--left content_btn--bottom" value="Czytaj dalej" :href="`/posts/${postId}`" />
       </div>
-    </div>
-  </div>
+    </section>
+  </article>
 </template>
 
 <script>
@@ -26,7 +26,3 @@ export default {
   props: [ 'postId', 'title', 'description', 'tags', 'date', 'image' ]
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/LatestPost.scss';
-</style>

@@ -14,15 +14,9 @@
 </template>
 
 <script>
-  import Button from './Button';
-  import GalleryContainer from './GalleryContainer';
 
   export default {
     name: 'quill-example-nuxt',
-    components: {
-      Button,
-      GalleryContainer
-    },
     props: ['valueInput', 'images'],
     data () {
       return {
@@ -69,18 +63,3 @@
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/components/Editor.scss';
-
-  #editor_gallery {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw !important;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: white;
-    z-index: 999 !important;
-  }
-</style>

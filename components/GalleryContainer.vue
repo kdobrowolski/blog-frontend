@@ -1,5 +1,5 @@
 <template>
-    <div class="Gallery_container">
+    <section class="Gallery_container">
         <Button v-if="isForm" value="Zamknij" @click.native="hide()"/>
         <h2 class="container_header">Dodaj do galerii</h2>
         <form class="container_form" @submit.prevent="submit($event)">
@@ -23,21 +23,13 @@
             ></b-pagination>
       </div>
         <Alert v-if="alertIsActive" type="deleteImage" :filename="filename" @hide="alertIsActive = false" @images="newImages"/>
-    </div>
+    </section>
 </template>
 
 <script>
-import FileInput from './FileInput';
-import Button from './Button';
-import Alert from './Alert';
 
 export default {
     name: 'GalleryContainer',
-    components: {
-        FileInput,
-        Button,
-        Alert
-    },
     data: () => ({
         inputValue: null,
         alertIsActive: false,
@@ -91,34 +83,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-    .Gallery_container {
-        text-align: left;
-        & > .container_form, & > .container_header {
-            margin-top: 30px;
-            text-align: center;
-        }
-    }
-    .container_image {
-        margin-top: 40px;
-        text-align: center;
-        & > .image {
-            width: 250px;
-            height: 250px;
-        }
-
-        @include md {
-            display: inline-block;
-            width: 50%;
-        }
-
-        @include lg {
-            width: 33%;
-        }
-
-        @include xxl {
-            width: 25%;
-        }
-    }
-</style>

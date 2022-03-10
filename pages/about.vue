@@ -1,9 +1,9 @@
 <template>
-  <div class="Main_about">
-    <UserCard :content="aboutMe"/>
-    <h2 class="about_header">
+  <section class="Main_about">
+    <AboutContainer :content="aboutMe"/>
+    <h1 class="about_header">
       Moderatorzy
-    </h2>
+    </h1>
     <ModeratorAdmin 
       v-for="moderator in moderators" 
       :key="moderator.id" 
@@ -12,20 +12,13 @@
       :email="moderator.email"
       :id="moderator.id"
     />
-  </div>
+  </section>
 </template>
 
 <script>
-import ModeratorCard from '../components/ModeratorCard';
-import UserCard from '../components/UserCard';
 
 export default {
-  layout: 'blog',
   name: 'AboutPage',
-  components: {
-    ModeratorCard,
-    UserCard
-  },
   async asyncData({ store }) {
     await store.dispatch('getAboutMe');
     await store.dispatch('users/getModerators');
@@ -38,7 +31,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/pages/About.scss';
-</style>

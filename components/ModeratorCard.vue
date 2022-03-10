@@ -1,5 +1,5 @@
 <template>
-  <div class="Moderator_card">
+  <article class="Moderator_card">
     <div class="card_info">
       <p class="card_username">
         {{ firstName + " " + lastName }}
@@ -8,7 +8,7 @@
         {{ email }}
       </p>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>
@@ -18,7 +18,3 @@ export default {
   props: ['firstName', 'lastName', 'email']
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/ModeratorCard.scss';
-</style>

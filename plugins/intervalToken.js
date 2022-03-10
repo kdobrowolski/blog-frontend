@@ -1,6 +1,3 @@
-import Vue from 'vue';
-import Cookie from 'js-cookie';
-import jwt_decode from 'jwt-decode';
 
 export default (ctx) => {
 

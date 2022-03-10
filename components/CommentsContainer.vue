@@ -1,5 +1,5 @@
 <template>
-  <div class="Comments_container">
+  <section class="Comments_container">
     <h2 v-if="Object.keys(commentsData).length !== 0" class="container_header">
       Komentarze
     </h2>
@@ -35,21 +35,13 @@
         align="center"
       ></b-pagination>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import Button from './Button';
-import Input from './Input';
-import Comment from './Comment';
 
 export default {
   name: 'CommentsContainer',
-  components: {
-    Button,
-    Input,
-    Comment
-  },
   props: {
     comments: {},
     isAdmin: {
@@ -72,19 +64,20 @@ export default {
     this.commentsData = this.comments;
   },
   computed: {
-    itemsForList: {
-      get: function () {
-        return this.commentsData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
-      }
+    itemsForList() {
+      return this.commentsData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage,);
     }
   },
   methods: {
-    async submit() {
+    resetStatus() {
       this.errors = {
         fullnameError: null,
         contentError: null
       }
       this.success = false;
+    },
+    async submit() {
+      this.resetStatus();
 
       if (this.fullname === '' || undefined) {
         this.errors.fullnameError = "Imię i nazwisko jest wymagane!"
@@ -119,7 +112,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/CommentsContainer.scss';
-</style>

@@ -18,13 +18,9 @@
 </template>
 
 <script>
-import Button from './Button';
 
 export default {
   name: 'Input',
-  components: {
-    Button
-  },
   props: {
     name: {
       type: String
@@ -75,7 +71,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/Input.scss';
-</style>

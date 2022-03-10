@@ -6,8 +6,8 @@
     <p v-if="errors.lastNameError" class="form_error">{{ errors.lastNameError }}</p>
     <Input v-model="email" type="email" placeholder="Adres e-mail" label="Adres e-mail" name="email" />
     <p v-if="errors.emailError" class="form_error">{{ errors.emailError }}</p>
-    <Input v-model="username" type="text" placeholder="Nazwa użytkownika" label="Nazwa użytkownika" name="username" />
-    <p v-if="errors.usernameError" class="form_error">{{ errors.usernameError }}</p>
+    <Input v-model="name" type="text" placeholder="Nazwa użytkownika" label="Nazwa użytkownika" name="username" />
+    <p v-if="errors.nameError" class="form_error">{{ errors.nameError }}</p>
     <Input v-model="password" type="password" placeholder="Hasło" label="Hasło" name="password" />
     <p v-if="errors.passwordError" class="form_error">{{ errors.passwordError }}</p>
     <Input v-model="repeatPassword" type="password" placeholder="Powtórz hasło" label="Powtórz hasło" name="repeat_password" />
@@ -20,27 +20,21 @@
 
 <script>
 import { moderatorValidation } from '../helpers/validationForms';
-import Button from './Button';
-import Input from './Input';
 
 export default {
   name: 'ModeratorForm',
-  components: {
-    Button,
-    Input
-  },
   data: () => ({
     firstName: '',
     lastName: '',
     email: '',
-    username: '',
+    name: '',
     password: '',
     repeatPassword: '',
     errors: {
       firstNameError: null,
       lastNameError: null,
       emailError: null,
-      usernameError: null,
+      nameError: null,
       passwordError: null,
       repeatPasswordError: null,
       existUser: false
@@ -53,24 +47,28 @@ export default {
     }
   },
   methods: {
-    async submit(e) {
+    resetStatus() {
       this.errors = {
         firstNameError: null,
         lastNameError: null,
         emailError: null,
-        usernameError: null,
+        nameError: null,
         passwordError: null,
         repeatPasswordError: null,
         existUser: false,
       }
       this.success = false;
+    },
+    async submit(e) {
+      this.resetStatus();
 
       const user = {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        username: this.username,
+        name: this.name,
         password: this.password,
+        roles: ['Moderator']
       }
 
       const validation = moderatorValidation(user, this.repeatPassword);
@@ -82,18 +80,13 @@ export default {
           firstNameError: errors.firstNameError,
           lastNameError: errors.lastNameError,
           emailError: errors.emailError,
-          usernameError: errors.usernameError,
+          nameError: errors.nameError,
           passwordError: errors.passwordError,
-          repeatPasswordError: errors.repeat_passwordError,
+          repeatPasswordError: errors.repeatPasswordError,
         }
       } else {
         try {
-          const payload = {
-            ...user,
-            isAdmin: 0
-          }
-
-          await this.$store.dispatch('users/createModerator', payload);
+          await this.$store.dispatch('users/createModerator', user);
           this.success = true;
         } catch (error) {
           this.errors.existUser = true;
@@ -104,7 +97,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/components/ModeratorForm.scss';
-</style>

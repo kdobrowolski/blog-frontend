@@ -1,11 +1,14 @@
 <template>
   <form class="edit_form" @submit.prevent="submit(type)">
-      <template v-if="newEmailForm">
-          <Input v-model="email" type="email" placeholder="Nowy e-mail" label="Nowy e-mail" name="email" />
+      <template v-if="updateUserForm">
+          <Input v-model="firstName" type="text" placeholder="Imię" :value-input="formValue ? formValue.firstName : false" label="Imię" name="firstName" />
+          <p v-if="errors.firstNameError" class="form_error">{{ errors.firstNameError }}</p>
+          <Input v-model="lastName" type="text" placeholder="Nazwisko" :value-input="formValue ? formValue.lastName : false" label="Nazwisko" name="lastName" />
+          <p v-if="errors.lastNameError" class="form_error">{{ errors.lastNameError }}</p>
+          <Input v-model="email" type="email" placeholder="E-mail" :value-input="formValue ? formValue.email : false" label="E-mail" name="email" />
           <p v-if="errors.emailError" class="form_error">{{ errors.emailError }}</p>
-          <Input v-model="repeatEmail" type="email" placeholder="Powtórz e-mail" label="Powtórz e-mail" name="repeat_email" />
-          <p v-if="errors.repeatEmailError" class="form_error">{{ errors.repeatEmailError }}</p>
-          <p v-if="successEmail" class="form_success">Pomyślnie zmieniono adres e-mail!</p>
+          <multiselect class="form_multiselect" v-model="roles" :options="options" placeholder="Uprawnienia" :close-on-select="false" :multiple="true" :select-label="selectLabel" :deselect-label="deselectLabel" :selected-label="selectedLabel"/>
+          <p v-if="successUpdate" class="form_success">Pomyślnie zapisano zmiany!</p>
           <Button element="submit" value="Zmień" />
       </template>
       <template v-else-if="newPasswordForm">
@@ -19,27 +22,17 @@
           <p v-if="successPassword" class="form_success">Pomyślnie zmieniono hasło!</p>
           <Button element="submit" value="Zmień" />
       </template>
-      <template v-else-if="changeFullnameForm">
-          <Input v-model="firstName" type="text" placeholder="Imię" label="Imię" name="firstName" />
-          <p v-if="errors.firstNameError" class="form_error">{{ errors.firstNameError }}</p>
-          <Input v-model="lastName" type="text" placeholder="Nazwisko" label="Nazwisko" name="lastName" />
-          <p v-if="errors.lastNameError" class="form_error">{{ errors.lastNameError }}</p>
-          <p v-if="successFullName" class="form_success">Pomyślnie zmieniono imie i nazwisko!</p>
-          <Button element="submit" value="Zmień" />
-      </template>
   </form>
 </template>
 
 <script>
-import { newFullNameValidation, newEmailValidation, newPasswordValidation } from '../helpers/validationForms';
-import Button from './Button';
-import Input from './Input';
+import { updateUserValidation, newPasswordValidation } from '../helpers/validationForms';
+import Multiselect from 'vue-multiselect';
 
 export default {
   name: 'EditModeratorForm',
   components: {
-    Button,
-    Input
+    Multiselect
   },
   data: () => ({
     email: '',
@@ -49,140 +42,123 @@ export default {
     repeatNewPassword: '',
     firstName: '',
     lastName: '',
+    roles: null,
+    options: ['Admin', 'Moderator'],
+    selectLabel: "Kliknij, aby wybrać",
+    deselectLabel: "Kliknij, aby usunąć",
+    selectedLabel: "Wybrano",
     errors: {
       firstNameError: null,
       lastNameError: null,
       emailError: null,
-      repeatEmailError: null,
       oldPasswordError: null,
       newPasswordError: null,
       repeatNewPasswordError: null,
-      wrong_oldPassword: false
+      wrongOldPassword: false
     },
-    successEmail: false,
+    successUpdate: false,
     successPassword: false,
-    successFullName: false,
   }),
   props: {
-      newEmailForm: false,
+      updateUserForm: false,
       newPasswordForm: false,
-      changeFullnameForm: false,
       type: '',
+      formValue: null
+  },
+  mounted() {
+    if (this.formValue) {
+      this.email = this.formValue.email;
+      this.firstName = this.formValue.firstName;
+      this.lastName = this.formValue.lastName;
+      this.roles = this.formValue.roles;
+    }
+    
   },
   methods: {
-    async submit() {
-      const { type } = this;
-
+    resetStatus() {
       this.errors = {
-        firstNameError: null,
-        lastNameError: null,
-        emailError: null,
-        repeatEmailError: null,
         oldPasswordError: null,
         newPasswordError: null,
         repeatNewPasswordError: null,
         wrongOldPassword: null
       }
 
-      this.successEmail = false;
+      this.successUpdate = false;
       this.successPassword = false;
-      this.successFullName = false;
+    },
+    async submit() {
+      const { type } = this;
 
-      // FULLNAME UPDATE
-      if (type === 'fullname') {
-        const fullname = {
-          firstName: this.firstName,
-          lastName: this.lastName
-        }
-
-        const validation = newFullNameValidation(fullname);
-
-        if (validation.errors) {
-          const { errors } = validation;
-          this.errors = {
-            ...this.errors,
-            firstNameError: errors.firstNameError,
-            lastNameError: errors.lastNameError
-          }
-        } else {
-          try {
-            const id = this.$route.params.moderator;
-            const payload = {
-              ...fullname,
-              id
-            }
-
-            await this.$store.dispatch('users/changeFullName', payload);
-            this.successFullName = true;
-          } catch (error) {
-            console.log(error);
-          }
-        }
+      if (type === 'user') {
+        this.userUpdate();
+      } else if (type === 'password') {
+        this.passwordUpdate();
+      }
+    },
+    async userUpdate() {
+      const { firstName, lastName, email, roles } = this;
+      const user = {
+        firstName,
+        lastName,
+        email,
+        roles
       }
 
-      // EMAIL UPDATE
-      else if (type === 'email') {
-        const email = {
-          email: this.email,
-          repeat_email: this.repeatEmail
-        }
-        console.log(email);
-        const validation = newEmailValidation(email);
+      const validation = updateUserValidation(user);
 
-        if (validation.errors) {
-          const { errors } = validation;
+      if (validation.errors) {
+        const { errors } = validation;
           this.errors = {
-            ...this.errors,
-            emailError: errors.emailError,
-            repeatEmailError: errors.repeatEmailError
+          ...this.errors,
+          firstNameError: errors.firstNameError,
+          lastNameError: errors.lastNameError,
+          emailError: errors.emailError
+        }
+      } else {
+        try {
+          const id = this.$route.params.moderator;
+          const payload = {
+            ...user,
+            id
           }
-        } else {
-          try {
-            const id = this.$route.params.moderator;
-            const payload = {
-              ...email,
-              id
-            }
 
-            await this.$store.dispatch('users/changeEmail', payload);
-            this.successEmail = true;
-          } catch (error) {
-            console.log(error);
-          }
+          await this.$store.dispatch('users/updateUser', payload);
+          this.successUpdate = true;
+        } catch (error) {
+          console.log(error);
         }
       }
-      // PASSWORD UPDATE
-      else if (type === 'password') {
-        const password = {
-          old_password: this.oldPassword,
-          new_password: this.newPassword,
-          repeat_new_password: this.repeatNewPassword
+    },
+    async passwordUpdate() {
+      const password = {
+        oldPassword: this.oldPassword,
+        newPassword: this.newPassword,
+        repeatNewPassword: this.repeatNewPassword
+      }
+
+      const validation = newPasswordValidation(password);
+
+      if (validation.errors) {
+        const { errors } = validation;
+        this.errors = {
+          ...this.errors,
+          oldPasswordError: errors.oldPasswordError,
+          newPasswordError: errors.newPasswordError,
+          repeatNewPasswordError: errors.repeatNewPasswordError
         }
-
-        const validation = newPasswordValidation(password);
-
-        if (validation.errors) {
-          const { errors } = validation;
-          this.errors = {
-            ...this.errors,
-            oldPasswordError: errors.oldPasswordError,
-            newPasswordError: errors.newPasswordError,
-            repeatNewPasswordError: errors.repeatNewPasswordError
+      } else {
+        try {
+          const id = this.$route.params.moderator;
+          const payload = {
+            ...password,
+            id
           }
-        } else {
-          try {
-            const id = this.$route.params.moderator;
-            const payload = {
-              ...password,
-              id
-            }
 
-            await this.$store.dispatch('users/changePassword', payload);
-            this.successPassword = true;
-          } catch (error) {
-            this.errors.wrongOldPassword = true;
-            console.log(error);
-          }
+          await this.$store.dispatch('users/changePassword', payload);
+          this.successPassword = true;
+        } catch (error) {
+          this.errors.wrongOldPassword = true;
+          console.log(error);
         }
       }
     }
@@ -190,6 +166,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '~/assets/scss/components/EditModeratorForm.scss';
-</style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

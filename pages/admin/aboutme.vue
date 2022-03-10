@@ -1,5 +1,5 @@
 <template>
-  <div class="Admin_about">
+  <section class="Admin_about">
     <form class="about_form" @submit.prevent="submit($event)">
         <Editor :images="images" @content="updateContent" :value-input="aboutMe ? aboutMe : false"/>
         <p v-if="success" class="form_success">Zaaktualizowano pomyślnie!</p>
@@ -7,20 +7,14 @@
         <Button element="submit" value="Zaaktualizuj" />
     </form>
     <Button element="nuxt-link" class="page_btn--width" value="Wróć" href="/admin" />
-  </div>
+  </section>
 </template>
 
 <script>
-import Button from '../../components/Button';
-import Editor from '../../components/Editor.vue';
 
 export default {
   name: 'AdminHomePage',
   layout: 'admin',
-  components: {
-    Button,
-    Editor
-  },
   middleware: ['logged-in'],
   data: () => ({
       content: null,
@@ -31,14 +25,14 @@ export default {
     updateContent(val) {
       this.content = val;
     },
+    resetStatus() {
+      this.success = false;
+      this.error = false;
+    },
     async submit() {
-        this.success = false;
-        this.error = false;
+        this.resetStatus();
         try {
-            const payload = {
-                content: this.content
-            }
-            await this.$store.dispatch('editAboutMe', payload);
+            await this.$store.dispatch('editAboutMe', this.content);
             this.success = true;
         } catch (err) {
             this.error = true;
@@ -58,6 +52,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-</style>

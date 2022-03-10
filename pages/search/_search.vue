@@ -1,11 +1,11 @@
 <template>
-  <div class="Search_page">
-    <h2 v-if="searchedPosts.length !== 0" class="page_header">
+  <section class="Search_page">
+    <h1 v-if="searchedPosts.length !== 0" class="page_header">
       Wyszukane posty
-    </h2>
-    <h2 v-else class="page_header">
+    </h1>
+    <h1 v-else class="page_header">
       Brak wyszukanych postów
-    </h2>
+    </h1>
     <PostCard
       v-for="post in searchedPosts"
       :key="post.id"
@@ -16,18 +16,13 @@
       :date="post.date"
       :image="post.mainImage"
     />
-  </div>
+  </section>
 </template>
 
 <script>
-import PostCard from '../../components/PostCard';
 
 export default {
-  layout: 'blog',
   name: 'SearchPage',
-  components: {
-    PostCard
-  },
   data: () => ({
     searchedPosts: []
   }),
@@ -53,7 +48,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/pages/search/_search.scss';
-</style>

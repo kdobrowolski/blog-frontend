@@ -1,21 +1,15 @@
 <template>
-  <div class="Admin_post_add_page">
+  <section class="Admin_post_add_page">
     <Button element="nuxt-link" value="Wróć" href="/admin/posts" />
     <PostForm form-type="create" :images="images"/>
-  </div>
+  </section>
 </template>
 
 <script>
-import PostForm from '../../../components/PostForm';
-import Button from '../../../components/Button';
 
 export default {
   name: 'AdminPostPage',
   layout: 'admin',
-  components: {
-    PostForm,
-    Button,
-  },
   middleware: ['logged-in'],
   async asyncData({ store }) {
     try {
@@ -29,7 +23,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss" scoped>
-  @import '~/assets/scss/pages/admin/posts/add.scss';
-</style>

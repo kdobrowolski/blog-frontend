@@ -1,21 +1,23 @@
 <template>
   <footer class="Footer">
     <div class="footer_menu">
-      <ul class="menu_list">
-        <li class="list_item">
-          <NuxtLink class="item_link" to="/">Strona główna</NuxtLink>
-        </li>
-        <li class="list_item">
-          <NuxtLink class="item_link" to="/about">O mnie</NuxtLink>
-        </li>
-        <li class="list_item">
-          <NuxtLink class="item_link" to="/posts">Posty</NuxtLink>
-        </li>
-        <li class="list_item">
-          <NuxtLink class="item_link" to="/contact">Kontakt</NuxtLink>
-        </li>
-      </ul>
-      <div class="menu_contact_info">
+      <section class="menu_nav">
+        <ul class="nav_list">
+          <li class="list_item">
+            <NuxtLink class="item_link" to="/">Strona główna</NuxtLink>
+          </li>
+          <li class="list_item">
+            <NuxtLink class="item_link" to="/about">O mnie</NuxtLink>
+          </li>
+          <li class="list_item">
+            <NuxtLink class="item_link" to="/posts">Posty</NuxtLink>
+          </li>
+          <li class="list_item">
+            <NuxtLink class="item_link" to="/contact">Kontakt</NuxtLink>
+          </li>
+        </ul>
+      </section>
+      <section class="menu_contact_info">
         <p class="menu_email">
           kdobrowolski12345@gmail.com
         </p>
@@ -25,7 +27,7 @@
         <p class="menu_location">
           Starogard Gdański, Polska
         </p>
-      </div>
+      </section>
       <p class="menu_copyright">
         Copyright &copy; Kacper Dobrowolski 2021
       </p>
@@ -39,7 +41,3 @@ export default {
   name: 'Footer',
 }
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/Footer.scss';
-</style>
