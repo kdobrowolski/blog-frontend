@@ -8,6 +8,16 @@
     font-weight: 600;
     letter-spacing: 2px;
   }
+  & > .swiper {
+    height: 650px;
+  }
+
+  @include lg{
+    & > .swiper {
+      height: auto;
+    }
+  }
+
   @include lg {
     width: 80%;
   }
