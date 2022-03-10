@@ -6,7 +6,8 @@
     }
 }
 .container_image {
-    margin-top: 40px;
+    margin: 0 auto;
+    margin-top: 40px !important;
     text-align: center;
     & > .image {
         width: 250px;
