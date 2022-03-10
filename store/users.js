@@ -47,7 +47,6 @@ export const actions = {
 
   async authMe ({ state, commit, dispatch }, { app, accessToken }) {
     try {
-      this.$axios.setToken(accessToken, 'Bearer');
       const user = await this.$axios.$get('/api/auth/me', { progress: false });
       commit ('SET_USER', user);
     } catch (error) {
