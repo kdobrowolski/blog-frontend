@@ -1,19 +1,20 @@
 <template>
-  <div class="User_card">
-    <h1 class="user_header">O mnie</h1>
-    <p class="user_content" v-html="content"></p>
-  </div>
+  <article class="User_card">
+    <div class="card_info">
+      <p class="card_username">
+        {{ firstName + " " + lastName }}
+      </p>
+      <p class="card_email">
+        {{ email }}
+      </p>
+    </div>
+  </article>
 </template>
 
 <script>
 
 export default {
   name: 'UserCard',
-  props: ['content']
+  props: ['firstName', 'lastName', 'email']
 };
-
 </script>
-
-<style lang="scss" scoped>
-  @import '../assets/scss/components/UserCard.scss';
-</style>

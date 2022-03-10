@@ -1,4 +1,3 @@
-import Cookie from 'js-cookie';
 
 export const state = () => ({
   posts: []
@@ -18,8 +17,7 @@ export const getters = {
 
 export const actions = {
   async createPost ({ commit }, payload) {
-    const res = await this.$axios.$post('/api/post',
-      payload, { progress: false });
+    const res = await this.$axios.$post('/api/post', payload, { progress: false });
   },
 
   async getPosts ({ commit }, payload) {
@@ -28,19 +26,15 @@ export const actions = {
   },
 
   async deletePosts ({ commit }, payload) {
-    await this.$axios.$delete(`/api/post/${payload}`,
-      {
-        progress: false
-      });
+    await this.$axios.$delete(`/api/post/${payload}`, { progress: false });
   },
 
   async getOnePost ({ commit }, payload) {
-    return await this.$axios.$get(`/api/post/${payload}`);
+    return await this.$axios.$get(`/api/post/${payload}`, { progress: false });
   },
 
   async editPost ({ commit }, payload) {
-    const res = await this.$axios.$put(`/api/post/${payload.post_id}`, payload,
-      { progress: false});
+    const res = await this.$axios.$put(`/api/post/${payload.postId}`, payload.post, { progress: false});
   },
 
   async addReaction ({ commit }, payload) {

@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 export const state = () => ({
   user: null,
   updateUser: null,
-  moderators: null,
+  users: null,
   access_token: null
 })
 
@@ -13,8 +13,8 @@ export const mutations = {
     state.user = user;
   },
 
-  SET_MODERATORS (state, moderators) {
-    state.moderators = moderators;
+  SET_USERS (state, users) {
+    state.users = users;
   },
 
   SET_UPDATE_USER (state, user) {
@@ -35,8 +35,8 @@ export const getters = {
     return state.updateUser
   },
 
-  getModerators (state) {
-    return state.moderators;
+  getUsers (state) {
+    return state.users;
   },
 }
 
@@ -47,6 +47,7 @@ export const actions = {
 
   async authMe ({ state, commit, dispatch }, { app, accessToken }) {
     try {
+      this.$axios.setToken(accessToken, 'Bearer');
       const user = await this.$axios.$get('/api/auth/me', { progress: false });
       commit ('SET_USER', user);
     } catch (error) {
@@ -143,17 +144,17 @@ export const actions = {
     commit('SET_USER', null);
   },
 
-  async createModerator ({ commit }, payload) {
+  async createUser ({ commit }, payload) {
     await this.$axios.$post('/api/user', payload, { progress: false });
   },
 
-  async deleteModerator ({ commit }, payload) {
+  async deleteUser ({ commit }, payload) {
     await this.$axios.$delete(`/api/user/${payload}`, { progress: false });
   },
 
-  async getModerators ({ commit }, payload) {
-    const res = await this.$axios.$get('/api/user/moderator', { progress: false });
-    commit('SET_MODERATORS', res.moderators);
+  async getUsers ({ commit }, payload) {
+    const res = await this.$axios.$get('/api/user', { progress: false });
+    commit('SET_USERS', res.users);
   },
 
   async getUserById ({ commit }, payload) {

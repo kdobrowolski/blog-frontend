@@ -1,12 +1,12 @@
 <template>
-  <div class="Comment_container">
+  <article class="Comment_container">
     <p class="container_username">{{ fullname }}</p>
     <p class="container_date">{{ date | formatDate }}</p>
     <p class="container_content">{{ content }}</p>
     <template v-if="isAdmin">
       <Button value="Usuń" @click.native="deleteComment"/>
     </template>
-  </div>
+  </article>
 </template>
 
 <script>

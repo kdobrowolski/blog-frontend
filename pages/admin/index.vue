@@ -8,7 +8,7 @@
       <Button element="nuxt-link" class="page_btn--width" value="O mnie" href="/admin/aboutme" />
       <Button element="nuxt-link" class="page_btn--width" value="Posty" href="/admin/posts" />
       <Button element="nuxt-link" class="page_btn--width" value="Galeria" href="/admin/gallery" />
-      <Button element="nuxt-link" class="page_btn--width" value="Moderatorzy" href="/admin/moderators" />
+      <Button element="nuxt-link" class="page_btn--width" value="Użytkownicy" href="/admin/users" />
       <Button class="page_btn--width" value="Wyloguj się" @click.native="logout" />
     </section>
   </section>

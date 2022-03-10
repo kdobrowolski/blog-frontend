@@ -25,13 +25,13 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        } else if (type == 'deleteModerator') {
-            const id = this.$route.params.moderator;
+        } else if (type == 'deleteUser') {
+            const id = this.$route.params.user;
       
             try {
-                await this.$store.dispatch('users/deleteModerator', id);
+                await this.$store.dispatch('users/deleteUser', id);
                 this.$emit('hide', false);
-                this.$router.push('/admin/moderators');
+                this.$router.push('/admin/users');
             } catch (error) {
                 console.log(error);
             }

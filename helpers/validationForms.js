@@ -47,7 +47,7 @@ export const postValidation = (postValues ,isEdit) => {
   }
 }
 
-export const moderatorValidation = (userValues, repeatPassword) => {
+export const userValidation = (userValues, repeatPassword) => {
   const { firstName, lastName, name, email, password } = userValues;
   let errors = {};
 

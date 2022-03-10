@@ -155,13 +155,13 @@ export default {
         }
       } else {
         if (this.formType === 'create') {
-          this.createPost();
+          this.createPost(post);
         } else if (this.formType === 'edit') {
-          this.editPost();
+          this.editPost(post);
         }
       }
     },
-    async createPost() {
+    async createPost(post) {
       try {
         const { id } = this.$store.getters['users/getUser'];
         const payload = {
@@ -177,17 +177,19 @@ export default {
         console.log(error);
       }
     },
-    async editPost() {
+    async editPost(post) {
       try {
         const { id } = this.$store.getters['users/getUser'];
         const postId = this.$route.params.post;
 
         const payload = {
-          ...post,
-          userId: id,
+          post: {
+            ...post,
+            userId: id
+          },
           postId: postId,
-          mainImage: this.mainImage
         }
+        console.log(payload);
 
         await this.$store.dispatch('posts/editPost', payload);
         this.success = true;

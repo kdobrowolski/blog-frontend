@@ -53,9 +53,6 @@ export default {
       default: 'button'
     }
   },
-  mounted() {
-    console.log(this.element);
-  },
 
   methods: {
     search () {
