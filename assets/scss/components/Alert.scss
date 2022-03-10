@@ -1,0 +1,14 @@
+.Alert {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 9999;
+
+    & > .alert_content {
+        margin-top: 200px;
+        text-align: center;
+    }
+}

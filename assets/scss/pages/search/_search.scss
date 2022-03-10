@@ -1,0 +1,24 @@
+.Search_page {
+  width: 90%;
+  margin: 0 auto;
+  & > .page_header {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+    padding-bottom: 40px;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  @include md {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  @include lg {
+    width: 80%;
+  }
+}

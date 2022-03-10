@@ -1,0 +1,80 @@
+.Footer {
+  width: 100vw;
+  margin-top: 60px;
+  padding-bottom: 30px;
+  background-color: black;
+  & > .footer_menu {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    font-size: 1.2rem;
+    & .menu_nav {
+      & > .nav_list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        & > .list_item {
+          margin-top: 10px;
+          padding: 5px;
+
+          & > .item_link {
+            text-decoration: none;
+            color: white;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          @include sm {
+            &:first-child {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+
+      @include sm {
+        width: 50%;
+        text-align: center;
+      }
+    }
+    & > .menu_contact_info {
+      & > .menu_email {
+        margin-top: 30px;
+
+        @include sm {
+          margin-top: 0;
+        }
+      }
+
+      @include sm {
+        width: 50%;
+        text-align: center;
+      }
+    }
+
+    & > .menu_copyright {
+      margin-top: 30px;
+      font-weight: 700;
+
+      @include sm {
+        margin: 0 auto;
+        margin-top: 30px;
+      }
+    }
+    @include sm {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @include sm {
+      margin-top: 20px;
+    }
+
+    @include lg {
+      font-size: 1.5rem;
+    }
+  }
+}

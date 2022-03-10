@@ -1,0 +1,96 @@
+.Post_form {
+ & > .form_container {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+  }
+
+  & > .form_preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 30px;
+    background-color: white;
+    & > .preview_content {
+      width: 90%;
+      margin: 0 auto;
+      @include md {
+        width: 80%;
+      }
+      @include lg {
+        width: 50%;
+      }
+
+      & > .page_main_image {
+        width: 100%;
+        border-radius: 10px;
+    
+        @include md {
+          display: block;
+          margin: 0 auto;
+        }
+    
+      }
+      & > .page_info {
+        margin-top: 30px;
+        font-size: 1.4rem;
+        & > .info_tags {
+          color: $primary-color;
+          font-weight: 700;
+        }
+        & > .info_date {
+          color: $secondary-color;
+        }
+      }
+      & > .page_header {
+        font-size: 2.5rem;
+      }
+      & > .page_content {
+        font-size: 1.5rem;
+        word-wrap: break-word;
+    
+        & > p {
+          margin-top: 30px;
+        }
+    
+        & > img, & > p > img {
+          display: block;
+          margin: 0 auto;
+          width: 90%;
+          @include md {
+            width: 80%;
+          }
+          @include lg {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+#form_gallery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: white;
+  z-index: 999 !important;
+}
+
+.container_header {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #007aff;
+}
+
+.container_image {
+  margin-top: 25px;
+  width: 250px;
+}

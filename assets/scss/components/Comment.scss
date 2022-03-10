@@ -1,0 +1,17 @@
+.Comment_container {
+  width: 100%;
+  margin-top: 20px;
+  & > .container_username {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  & > .container_date {
+    margin-top: 5px;
+    font-size: 1.1rem;
+    color: $secondary-color;
+  }
+  & > .container_content {
+    font-size: 1.3rem;
+  }
+}

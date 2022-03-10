@@ -1,0 +1,14 @@
+.Latest_posts_board {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  text-align: center;
+  & > .board_header {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  @include lg {
+    width: 80%;
+  }
+}
