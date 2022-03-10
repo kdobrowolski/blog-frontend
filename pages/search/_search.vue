@@ -6,16 +6,18 @@
     <h1 v-else class="page_header">
       Brak wyszukanych postów
     </h1>
-    <PostCard
-      v-for="post in searchedPosts"
-      :key="post.id"
-      :post-id="post.id"
-      :title="post.title"
-      :description="post.description"
-      :tags="post.tags"
-      :date="post.date"
-      :image="post.mainImage"
-    />
+    <section class="page_posts">
+      <PostCard
+        v-for="post in searchedPosts"
+        :key="post.id"
+        :post-id="post.id"
+        :title="post.title"
+        :description="post.description"
+        :tags="post.tags"
+        :date="post.created_at"
+        :image="post.mainImage"
+      />
+    </section>
   </section>
 </template>
 

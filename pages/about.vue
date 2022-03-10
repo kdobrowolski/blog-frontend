@@ -4,13 +4,13 @@
     <h1 class="about_header">
       Moderatorzy
     </h1>
-    <ModeratorAdmin 
-      v-for="moderator in moderators" 
-      :key="moderator.id" 
-      :firstName="moderator.firstName" 
-      :lastName="moderator.lastName"
-      :email="moderator.email"
-      :id="moderator.id"
+    <UserAdmin 
+      v-for="user in users" 
+      :key="user.id" 
+      :firstName="user.firstName" 
+      :lastName="user.lastName"
+      :email="user.email"
+      :id="user.id"
     />
   </section>
 </template>
@@ -21,13 +21,13 @@ export default {
   name: 'AboutPage',
   async asyncData({ store }) {
     await store.dispatch('getAboutMe');
-    await store.dispatch('users/getModerators');
+    await store.dispatch('users/getUsers');
 
 
-    const moderators = store.getters['users/getModerators'];
+    const users = store.getters['users/getUsers'];
     const aboutMe = store.getters['getAboutMeContent'];
 
-    return { moderators, aboutMe };
+    return { users, aboutMe };
   }
 };
 </script>

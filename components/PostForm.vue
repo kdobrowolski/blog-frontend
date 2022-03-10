@@ -189,7 +189,6 @@ export default {
           },
           postId: postId,
         }
-        console.log(payload);
 
         await this.$store.dispatch('posts/editPost', payload);
         this.success = true;

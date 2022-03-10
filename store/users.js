@@ -45,13 +45,13 @@ export const actions = {
     const { data } = await this.$axios.$post('/api/auth/login', payload, { progress: false });
   },
 
-  async authMe ({ state, commit, dispatch }, { app, accessToken }) {
+  async authMe ({ commit }, { app }) {
     try {
       const user = await this.$axios.$get('/api/auth/me', { progress: false });
       commit ('SET_USER', user);
     } catch (error) {
       app.router.push('/admin/login');
-  }
+    }
   },
 
   async checkRefreshToken ({ commit, dispatch }, { app, res }) {
@@ -133,8 +133,6 @@ export const actions = {
       await dispatch('authMe', authMePayload)
     }
   },
-
-
 
   async logout ({ commit }) {
     Cookie.remove('access_token');

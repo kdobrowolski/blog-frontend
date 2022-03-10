@@ -28,6 +28,7 @@
     "tiptap-vuetify": "^2.24.0",
     "vue-agile": "^2.0.0",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-multiselect": "^2.1.6",
     "vue-quill-editor": "^3.0.6"
   },
   "devDependencies": {

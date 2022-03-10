@@ -3,7 +3,7 @@
     <h2 class="board_header">
       Najnowsze
     </h2>
-    <swiper ref="mySwiper" :options="swiperOptions">
+    <swiper class="swiper" ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="latestPost in latestPosts" :key="latestPost.id">
         <LatestPost 
           :post-id="latestPost.id"
