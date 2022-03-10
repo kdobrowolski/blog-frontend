@@ -71,3 +71,26 @@
     }
   }
 }
+
+#form_gallery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: white;
+  z-index: 999 !important;
+}
+
+.container_header {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #007aff;
+}
+
+.container_image {
+  margin-top: 25px;
+  width: 250px;
+}

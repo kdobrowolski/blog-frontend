@@ -1,3 +1,21 @@
 .edit_form {
     text-align: center;
 }
+
+.form_multiselect {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 60px;
+    border: 1px solid $secondary-color !important;
+    border-radius: 5px;
+    outline: none !important;
+    color: black !important;
+
+    @include md {
+        width: 50%;
+      }
+  
+      @include lg {
+        width: 40%;
+      }
+}
